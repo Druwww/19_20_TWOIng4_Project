@@ -7,13 +7,21 @@ function App() {
     <div>
       <Container>
         <Row>
-          <Col>1 of 2</Col>
-          <Col>2 of 2</Col>
+          <Col className="menuBar">Menu bar</Col>
         </Row>
         <Row>
-          <Col>1 of 3</Col>
-          <Col>2 of 3</Col>
-          <Col>3 of 3</Col>
+          <Col md='8' className="mainWidget">6 widget gauche
+            <Row>
+              <Col className="widgetList">Widget To do List</Col>
+              <Col>Widget Tresorie</Col>
+            </Row>
+            <Row>
+              <Col>Widget Calendrier</Col>
+              <Col>Widget Nombre Membre</Col>
+              <Col>Widget Budget</Col>
+            </Row>
+          </Col>
+          <Col className="mainWidget">réseau sociaux</Col>
         </Row>
       </Container>
     </div>

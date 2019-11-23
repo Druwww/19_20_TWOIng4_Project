@@ -2,21 +2,25 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+
+.menuBar{
+  font-size: 1em;
+  background-color: blue;
+  width: auto;
+  height: 5em;
+  text-align: center;
+  margin-top: 1em;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.mainWidget{
+  font-size: 1em;
+  margin-right: 1em;
+  height:30em;
+  background-color: grey;
+  margin-top: 1em;
 }
 
-.App-link {
-  color: #09d3ac;
+.widgetList{
+  background-color: white;
 }
