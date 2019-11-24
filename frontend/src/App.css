@@ -23,4 +23,40 @@
 
 .widgetList{
   background-color: white;
+  height: 15em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.widgetTreso{
+  background-color: white;
+  height: 15em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.widgetCal{
+  background-color: white;
+  height: 10em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.widgetMembre{
+  background-color: white;
+  height: 10em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.widgetBudget{
+  background-color: white;
+  height: 10em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
 }

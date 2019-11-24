@@ -13,12 +13,12 @@ function App() {
           <Col md='8' className="mainWidget">6 widget gauche
             <Row>
               <Col className="widgetList">Widget To do List</Col>
-              <Col>Widget Tresorie</Col>
+              <Col className="widgetTreso">Widget Tresorie</Col>
             </Row>
             <Row>
-              <Col>Widget Calendrier</Col>
-              <Col>Widget Nombre Membre</Col>
-              <Col>Widget Budget</Col>
+              <Col className="widgetCal">Widget Calendrier</Col>
+              <Col className="widgetMembre">Widget Nombre Membre</Col>
+              <Col className="widgetBudget">Widget Budget</Col>
             </Row>
           </Col>
           <Col className="mainWidget">réseau sociaux</Col>
