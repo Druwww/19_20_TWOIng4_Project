@@ -4,6 +4,7 @@ import Number from './Number.js';
 import './Number.css'
 import Calendar from './Calendar.js';
 import './Calendar.css';
+import Graph from './Graph.js';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function App() {
@@ -17,12 +18,12 @@ function App() {
           <Col md='8' className="mainWidget">6 widget gauche
             <Row>
               <Col className="widgetList">Widget To do List</Col>
-              <Col className="widgetTreso">Widget Tresorie</Col>
+              <Col className="widgetTreso">Widget Tresorie <Graph></Graph></Col>
             </Row>
             <Row>
               <Col className="widgetCal">Widget Semaine
               <Calendar></Calendar>
-              </Col> 
+              </Col>
               <Col className="widgetNumberSensor">
                 <Number sensorsNumber="4"></Number>
               </Col >
