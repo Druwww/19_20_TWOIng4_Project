@@ -18,7 +18,7 @@ function App() {
           <Col md='8' className="mainWidget">6 widget gauche
             <Row>
               <Col className="widgetList">Widget To do List</Col>
-              <Col className="widgetTreso">Widget Tresorie <Graph></Graph></Col>
+              <Col className="widgetTreso">Widget Tresorie</Col>
             </Row>
             <Row>
               <Col className="widgetCal">Widget Semaine

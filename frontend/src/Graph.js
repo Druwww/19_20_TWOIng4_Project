@@ -3,6 +3,8 @@ import './App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 
+//To use put : <Graph></Graph>
+
 const dataGraph = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page B', uv: 400, pv: 2400, amt: 2400}, {name: 'Page C', uv: 400, pv: 2400, amt: 2400}];
 
 class Graph extends React.Component {
