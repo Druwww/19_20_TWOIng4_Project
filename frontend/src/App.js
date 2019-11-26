@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './Number.js';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function App() {
