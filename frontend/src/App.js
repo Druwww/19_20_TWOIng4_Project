@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import Calendar from './Calendar.js';
+import './Calendar.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function App() {
@@ -16,7 +18,7 @@ function App() {
               <Col className="widgetTreso">Widget Tresorie</Col>
             </Row>
             <Row>
-              <Col className="widgetCal">Widget Calendrier</Col>
+              <Col className="widgetCal">Widget Semaine<Calendar></Calendar></Col> 
               <Col className="widgetMembre">Widget Nombre Membre</Col>
               <Col className="widgetBudget">Widget Budget</Col>
             </Row>

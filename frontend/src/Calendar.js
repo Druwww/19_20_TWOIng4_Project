@@ -15,11 +15,33 @@ import './Calendar.css';
 
 //source : https://codepen.io/gaearon/pen/oWWQNa?editors=0010
 
+const day='Mon';
+
 class Square extends React.Component {
     render() {
         return (
             <button className="square">
-                {/* TODO */}
+                {this.props.value}
+            </button>
+        );
+    }
+}
+
+class SquareColoredGreen extends React.Component {
+    render() {
+        return (
+            <button className="square_color_green">
+                {this.props.value}
+            </button>
+        );
+    }
+}
+
+class SquareColoredRed extends React.Component {
+    render() {
+        return (
+            <button className="square_color_red">
+                {this.props.value}
             </button>
         );
     }
@@ -27,7 +49,15 @@ class Square extends React.Component {
 
 class Calendar extends React.Component {
     renderSquare(i) {
-        return <Square />;
+        if(i=='Mon'){
+            return <SquareColoredGreen value={i} />;
+        }
+        else if(i=='Fri'){
+            return <SquareColoredRed value={i} />;
+        }
+        else{
+            return <Square value={i} />;
+        }
     }
 
     render() {
@@ -35,17 +65,17 @@ class Calendar extends React.Component {
         return (
             <div className="calendar">
                 <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
+                    {this.renderSquare('Mon')}
+                    {this.renderSquare('Tue')}
+                    {this.renderSquare('Wed')}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
+                    {this.renderSquare('Thu')}
+                    {this.renderSquare('Fri')}
+                    {this.renderSquare('Sat')}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare(6)}
+                    {this.renderSquare('Sun')}
                 </div>
             </div>
         );

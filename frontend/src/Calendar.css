@@ -12,10 +12,40 @@ ol, ul {
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 34px;
-  height: 45px;
+  height: 40px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 60px;
+}
+
+.square_color_green{
+  background-color: chartreuse;
+  border: 1px solid #999;
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 40px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 60px;
+}
+
+.square_color_red{
+  background-color: crimson;
+  border: 1px solid #999;
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 40px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
@@ -28,5 +58,6 @@ ol, ul {
 }
 
 .calendar{
-  margin-top: 9%;
+  margin-top: 3%;
+  margin-left: 2%;  
 }
