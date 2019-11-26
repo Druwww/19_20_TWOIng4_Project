@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
-import './Number.js';
+import Number from './Number.js';
+import './Number.css'
+import Calendar from './Calendar.js';
+import './Calendar.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function App() {
@@ -17,8 +20,12 @@ function App() {
               <Col className="widgetTreso">Widget Tresorie</Col>
             </Row>
             <Row>
-              <Col className="widgetCal">Widget Semaine</Col> 
-              <Col className="widgetMembre">Widget Nombre Membre</Col>
+              <Col className="widgetCal">Widget Semaine
+              <Calendar></Calendar>
+              </Col> 
+              <Col className="widgetNumberSensor">
+                <Number sensorsNumber="4"></Number>
+              </Col >
               <Col className="widgetBudget">Widget Budget</Col>
             </Row>
           </Col>
