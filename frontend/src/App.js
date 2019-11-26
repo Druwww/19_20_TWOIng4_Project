@@ -17,7 +17,7 @@ function App() {
               <Col className="widgetTreso">Widget Tresorie</Col>
             </Row>
             <Row>
-              <Col className="widgetCal">Widget Calendrier</Col>
+              <Col className="widgetCal">Widget Semaine</Col> 
               <Col className="widgetMembre">Widget Nombre Membre</Col>
               <Col className="widgetBudget">Widget Budget</Col>
             </Row>
