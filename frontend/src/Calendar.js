@@ -17,47 +17,49 @@ import './Calendar.css';
 
 const day='Mon';
 
+
+
 class Square extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            bgColor: "white"
+        }
+    }
+
+    boxClick = (e) => {
+
+        if (this.state.bgColor == "red"){
+            this.setState({
+                bgColor: "green"
+            })
+        } else if (this.state.bgColor == "white"){
+            this.setState({
+                bgColor: "red"
+            })        
+        } else {
+            this.setState({
+                bgColor: "white"
+            })
+        }
+        
+    }
+
     render() {
+
         return (
-            <button className="square">
+            <button className="square" style={{ backgroundColor: this.state.bgColor }} onClick={this.boxClick}>
                 {this.props.value}
             </button>
         );
     }
 }
 
-class SquareColoredGreen extends React.Component {
-    render() {
-        return (
-            <button className="square_color_green">
-                {this.props.value}
-            </button>
-        );
-    }
-}
-
-class SquareColoredRed extends React.Component {
-    render() {
-        return (
-            <button className="square_color_red">
-                {this.props.value}
-            </button>
-        );
-    }
-}
 
 class Calendar extends React.Component {
     renderSquare(i) {
-        if(i=='Mon'){
-            return <SquareColoredGreen value={i} />;
-        }
-        else if(i=='Fri'){
-            return <SquareColoredRed value={i} />;
-        }
-        else{
-            return <Square value={i} />;
-        }
+        return <Square value={i} />;
     }
 
     render() {
