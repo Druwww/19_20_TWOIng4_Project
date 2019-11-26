@@ -1,0 +1,22 @@
+.oneTask{
+    border: thick double black;
+    margin-top: 1em;
+}
+
+.title{
+    font-size: 1,5em;
+    font-weight:bold;
+    margin: 0;
+    padding: 0;
+}
+
+.description{
+    width: 20em;
+    font-size: 1em;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
