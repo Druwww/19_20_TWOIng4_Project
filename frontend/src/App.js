@@ -6,6 +6,7 @@ import Calendar from './Calendar.js';
 import './Calendar.css';
 import Graph from './Graph.js';
 import Todo from './Todo.js'
+import Camembert from './Camembert.js'
 import { Container, Row, Col } from 'react-bootstrap';
 
 
