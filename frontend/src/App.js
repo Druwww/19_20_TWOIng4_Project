@@ -15,7 +15,6 @@ var dataTasks = [{name : "task 1", description :"ma description ouf"}, {name : "
 function App() {
   return (
     <div>
-      <Container>
         <Row>
           <Col className="menuBar">Menu bar</Col>
         </Row>
@@ -23,7 +22,7 @@ function App() {
           <Col md='8' className="mainWidget">6 widget gauche
             <Row>
               <Col className="widgetList"><Todo tasks={dataTasks}></Todo></Col>
-              <Col className="widgetTreso">Widget Tresorie</Col>
+              <Col className="widgetTreso"><Graph></Graph></Col>
             </Row>
             <Row>
               <Col className="widgetCal">Widget Semaine
@@ -32,12 +31,11 @@ function App() {
               <Col className="widgetNumberSensor">
                 <Number sensorsNumber="4"></Number>
               </Col >
-              <Col className="widgetBudget">Widget Budget</Col>
+              <Col className="widgetBudget"><Camembert></Camembert></Col>
             </Row>
           </Col>
           <Col className="mainWidget">réseau sociaux</Col>
         </Row>
-      </Container>
     </div>
   );
 }
