@@ -4,6 +4,7 @@ import Number from './Number.js';
 import './Number.css'
 import Calendar from './Calendar.js';
 import './Calendar.css';
+import Graph from './Graph.js';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
             <Row>
               <Col className="widgetCal">Widget Semaine
               <Calendar></Calendar>
-              </Col> 
+              </Col>
               <Col className="widgetNumberSensor">
                 <Number sensorsNumber="4"></Number>
               </Col >
