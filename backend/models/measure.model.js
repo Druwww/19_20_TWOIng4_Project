@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const measureSchema = new mongoose.Schema(
   {
-    _id: {
-      type: ObjectId,
-      required: true
-    },
+    // _id: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true
+    // },
     type: {
       type: String,
       required: true
@@ -15,16 +15,13 @@ const measureSchema = new mongoose.Schema(
       required: true
     },
     sensorID: {
-      type: ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true
     },
     value: {
-      type: Int32,
+      type: Number,
       required: true
     }
-  },
-  {
-    timestamps: true
   }
 );
 
