@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css';
 import {Row, Col} from 'react-bootstrap';
-import './App.css';
 import Graph from './Graph.js';
 import Todo from './Todo.js'
 import Camembert from './Camembert.js'
