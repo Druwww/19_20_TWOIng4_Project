@@ -1,43 +1,41 @@
 import React from 'react';
 import './App.css';
-import Number from './Number.js';
-import './Number.css'
-import Calendar from './Calendar.js';
-import './Calendar.css';
-import Graph from './Graph.js';
-import Todo from './Todo.js'
-import Camembert from './Camembert.js'
-import { Container, Row, Col } from 'react-bootstrap';
+import Admin from './Admin.js'
+import Home from './Home.js'
 
+import { Navbar, Row, Col, Nav } from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
-var dataTasks = [{name : "task 1", description :"ma description ouf"}, {name : "task 2", description :"The description ouf qui est beaucoup trop long donc elle va durer super mega longtemps lol mdrrr"}];
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Navbar bg="dark" variant="dark" fixed="top">
+          <Navbar.Brand href="/">Quentin et Pierre ^^</Navbar.Brand>
+          <Nav className="mr-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/admin">Admin</Nav.Link>
+          </Nav>
+        </Navbar>
 
-function App() {
-  return (
-    <div>
-        <Row>
-          <Col className="menuBar">Menu bar</Col>
-        </Row>
-        <Row>
-          <Col md='8' className="mainWidget">6 widget gauche
-            <Row>
-              <Col className="widgetList"><Todo tasks={dataTasks}></Todo></Col>
-              <Col className="widgetTreso"><Graph></Graph></Col>
-            </Row>
-            <Row>
-              <Col className="widgetCal">Widget Semaine
-              <Calendar></Calendar>
-              </Col>
-              <Col className="widgetNumberSensor">
-                <Number sensorsNumber="4"></Number>
-              </Col >
-              <Col className="widgetBudget"><Camembert></Camembert></Col>
-            </Row>
-          </Col>
-          <Col className="mainWidget">réseau sociaux</Col>
-        </Row>
-    </div>
-  );
+        <Switch>
+          <Route path="/admin">
+            <Admin />
+          </Route>
+
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+
+      </Router>
+    )
+  }
 }
 
 export default App;
+
