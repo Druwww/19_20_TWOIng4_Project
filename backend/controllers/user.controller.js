@@ -24,7 +24,6 @@ exports.create = (req, res) => {
       message: 'location can not be empty'
     });
   }
-
   if (!req.body.personsInHouse) {
     // If firstName is not present in body reject the request by
     // sending the appropriate http code
@@ -32,7 +31,6 @@ exports.create = (req, res) => {
       message: 'personsInHouse can not be empty'
     });
   }
-
   if (!req.body.houseSize) {
     // If firstName is not present in body reject the request by
     // sending the appropriate http code
@@ -104,8 +102,6 @@ exports.findOne = (req, res) => {
       diffParams.houseSize = req.body.houseSize;
     }
 
-    // res.send(diffParams);
-
     User.find(diffParams)
     .then(user => {
       if (!user) {
@@ -125,8 +121,6 @@ exports.findOne = (req, res) => {
         message: 'Error retrieving user with thoses params' + diffParams
       });
     });
-
-
   }
   else{
     return res.status(404).send({
@@ -135,43 +129,61 @@ exports.findOne = (req, res) => {
   }
 };
 
-// // Update a User identified by the UserId in the request
-// exports.update = (req, res) => {
-//   // Validate Request
-//   if (!req.body.firstName) {
-//     return res.status(400).send({
-//       message: 'first name can not be empty'
-//     });
-//   }
+// Update a User identified by the UserId in the request
+exports.update = (req, res) => {
+  // Validate Request
+  if (!req.body.userId) {
+    return res.status(400).send({
+      message: 'userId can not be empty'
+    });
+  }
 
-//   // Find user and update it with the request body
-//   User.findByIdAndUpdate(
-//     req.params.userId,
-//     {
-//       title: req.body.firstName,
-//       content: req.body.lastName || ''
-//     },
-//     { new: true }
-//   )
-//     .then(user => {
-//       if (!user) {
-//         return res.status(404).send({
-//           message: 'User not found with id ' + req.params.userId
-//         });
-//       }
-//       res.send(user);
-//     })
-//     .catch(err => {
-//       if (err.kind === 'ObjectId') {
-//         return res.status(404).send({
-//           message: 'User not found with id ' + req.params.userId
-//         });
-//       }
-//       return res.status(500).send({
-//         message: 'Error updating user with id ' + req.params.userId
-//       });
-//     });
-// };
+  User.findById(req.body.userId).lean()
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({
+          message: 'User not found with id ' + req.body.userId
+        });
+      }else{
+        const userReceived = req.body;
+        const newUser = Object.assign({}, user, userReceived);
+        delete newUser.userId;
+        newUser.personsInHouse = Number(newUser.personsInHouse);
+        
+        // Find user and update it with the request body
+        console.log(newUser);
+        User.findByIdAndUpdate(
+          req.body.userId,
+          {$set: {
+            location: newUser.location,
+            personsInHouse: newUser.personsInHouse,
+            houseSize: newUser.houseSize
+          }},
+          { new: true }
+        )
+          .then(userMod => {
+            console.log(userMod);
+            if (!userMod) {
+              return res.status(404).send({
+                message: 'User not found with id ' + req.body.userId
+              });
+            }
+            res.send(userMod);
+          })
+          .catch(err => {
+            if (err.kind === 'ObjectId') {
+              return res.status(404).send({
+                message: 'User not found with id ' + req.body.userId
+              });
+            }
+            return res.status(500).send({
+              message: 'Error updating user with id ' + req.body.userId
+            });
+          });
+      }
+        
+  })
+};
 
 // // Delete a User with the specified UserId in the request
 // exports.delete = (req, res) => {

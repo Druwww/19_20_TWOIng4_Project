@@ -4,8 +4,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const dbName = "DashboardProject";
-const dbURL = `mongodb://localhost:27017/${dbName}`;
+const dbURL = "mongodb+srv://quentin:mulliez@dashboardproject-jipvm.mongodb.net/DashboardProject?retryWrites=true&w=majority";
 // on se connecte à la base de données
 mongoose.connect(dbURL, {
     useNewUrlParser: true,

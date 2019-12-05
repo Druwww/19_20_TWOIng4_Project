@@ -8,4 +8,7 @@ router.put('/', user.create);
 
 router.get('/', user.findOne);
 
+router.post('/', user.update);
+
+
 module.exports = router;
