@@ -38,7 +38,7 @@ exports.create = (req, res) => {
     // If firstName is not present in body reject the request by
     // sending the appropriate http code
     return res.status(400).send({
-      message: 'sensorID can not be empty'
+      message: 'measureId can not be empty'
     });
   }
 
@@ -69,7 +69,157 @@ exports.create = (req, res) => {
       // In case of error during insertion of a new user in database we send an
       // appropriate message
       res.status(500).send({
-        message: err.message || 'Some error occurred while creating the Sensor.'
+        message: err.message || 'Some error occurred while creating the Measure.'
+      });
+    });
+};
+
+// Find a single User with a UserId
+exports.findOne = (req, res) => {
+
+  //If id is pass in request
+  if(req.body.measureId){
+    Measure.findById(req.body.measureId)
+    .then(measure => {
+      if (!measure) {
+        return res.status(404).send({
+          message: 'measure not found with id ' + req.body.measureId
+        });
+      }
+      res.send(measure);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'measure not found with id ' + req.body.measureId
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving measure with id ' + req.body.measureId
+      });
+    });
+  }else if(req.body){
+    var diffParams = {};
+
+    if(req.body.type){
+      diffParams.type = req.body.type;
+    }
+
+    if(req.body.creationDate){
+      diffParams.creationDate = req.body.creationDate;
+    }
+    
+    if(req.body.sensorID){
+      diffParams.sensorID = req.body.sensorID;
+    }
+
+    if(req.body.value){
+      diffParams.value = req.body.value;
+    }
+
+    Measure.find(diffParams)
+    .then(measure => {
+      if (!measure) {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params ' + diffParams
+        });
+      }
+      res.send(measure);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params ' +diffParams
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving measure with thoses params' + diffParams
+      });
+    });
+  }
+  else{
+    return res.status(404).send({
+      message: 'No params in request'
+    });
+  }
+};
+
+
+// Update a User identified by the UserId in the request
+exports.update = (req, res) => {
+  // Validate Request
+  if (!req.body.measureId) {
+    return res.status(400).send({
+      message: 'measureId can not be empty'
+    });
+  }
+
+  Measure.findById(req.body.measureId).lean()
+    .then(measure => {
+      if (!measure) {
+        return res.status(404).send({
+          message: 'Measure not found with id ' + req.body.measureId
+        });
+      }else{
+        const measureReceived = req.body;
+        const newMeasure = Object.assign({}, measure, measureReceived);
+        delete newMeasure.measureId;
+        newMeasure.value = Number(newMeasure.value);
+        
+        // Find user and update it with the request body
+        console.log(newMeasure);
+        Measure.findByIdAndUpdate(
+          req.body.measureId,
+          {$set: {
+            creationDate: newMeasure.creationDate,
+            value: newMeasure.value,
+            sensorID: newMeasure.sensorID,
+            type: newMeasure.type
+          }},
+          { new: true }
+        )
+          .then(measureMod => {
+            console.log(measureMod);
+            if (!measureMod) {
+              return res.status(404).send({
+                message: 'Measure not found with id ' + req.body.measureId
+              });
+            }
+            res.send(measureMod);
+          })
+          .catch(err => {
+            if (err.kind === 'ObjectId') {
+              return res.status(404).send({
+                message: 'Measure not found with id ' + req.body.measureId
+              });
+            }
+            return res.status(500).send({
+              message: 'Error updating Measure with id ' + req.body.measureId
+            });
+          });
+      }
+  })
+};
+
+// Delete a User with the specified UserId in the request
+exports.delete = (req, res) => {
+  Measure.findByIdAndRemove(req.body.measureId)
+    .then(measure => {
+      if (!measure) {
+        return res.status(404).send({
+          message: 'measure not found with id ' + req.body.measureId
+        });
+      }
+      res.send({ message: 'measure deleted successfully!' });
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId' || err.name === 'NotFound') {
+        return res.status(404).send({
+          message: 'measure not found with id ' + req.body.measureId
+        });
+      }
+      return res.status(500).send({
+        message: 'Could not delete measure with id ' + req.body.measureId
       });
     });
 };
