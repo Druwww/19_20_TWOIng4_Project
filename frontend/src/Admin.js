@@ -1,70 +1,100 @@
 import React from 'react';
-import {Row, Col, Button, Form } from 'react-bootstrap';
+import Calendar from './Calendar.js';
+import AddUserForm from './AddUserForm.js';
+import {Row, Col, Button, Toast, Form} from 'react-bootstrap';
 import './Admin.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
 
-class Admin extends React.Component{
+class Admin extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            showA: false,
+            showB: false,
+            showC: false,
+            formValue:0
+
+        };
+    }
+
+    /*displayForm(i){
+        if (i == 1){
+            return(
+                <Toast show={this.state.showA} onClose={() => this.setState({ showA: false })}>
+                    <Toast.Header>
+                        <button type="button" class="close ml-2" data-dismiss="toast" />
+                        <Button onClick={() => this.setState({ showB: true })}> Ajouter User</Button>
+                    </Toast.Header>
+
+                    <AddUserForm />
+
+                </Toast>
+            );
+        }
+        else if (i==2){
+            return(
+                <Toast show={this.state.showA} onClose={() => this.setState({ showA: false })}>
+                    <Toast.Header>
+                        <button type="button" class="close ml-2" data-dismiss="toast" />
+                        <Button onClick={() => this.setState({ showB: true })}> Ajouter Capteur</Button>
+                    </Toast.Header>
+
+                    <AddUserForm />
+
+                </Toast>
+            );
+
+        }
+    }*/
+
+    renderForm(){
+        return(<AddUserForm/>);
+    }
+
     render(){
-        return(
-            <div className="background">
-                <Row>
-                    <Col md="8">
-                        <Row>
-                            <Form className="formFormat">
-                                <Form.Row>
-                                    <Form.Group as={Col} controlId="formGridEmail">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" placeholder="Enter email" />
-                                    </Form.Group>
+        return (
 
-                                    <Form.Group as={Col} controlId="formGridPassword">
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Password" />
-                                    </Form.Group>
-                                </Form.Row>
+            <Row>
+                <Col md="2">
+                    <Button onClick={() => this.setState({ showA: true })}>
+                        Ajouter User
+                    </Button>
+                </Col>
+                <Col md="5">
+                    <Toast show={this.state.showA} onClose={() => this.setState({showA: false})}>
+                        <Toast.Header>
+                            <img
+                                src="holder.js/20x20?text=%20"
+                                className="rounded mr-2"
+                                alt=""
+                            />
+                            <Button onClick={() => this.setState({ showB: true })}> Ajouter capteur</Button>
+                            <small>11 mins ago</small>
+                        </Toast.Header>
+                        <Toast.Body>{this.renderForm()}</Toast.Body>
+                    </Toast>
+                    {/*this.displayForm(this.state.formValue)*/}
 
-                                <Form.Group controlId="formGridAddress1">
-                                    <Form.Label>Address</Form.Label>
-                                    <Form.Control placeholder="1234 Main St" />
-                                </Form.Group>
+                    
+                </Col>
 
-                                <Form.Group controlId="formGridAddress2">
-                                    <Form.Label>Address 2</Form.Label>
-                                    <Form.Control placeholder="Apartment, studio, or floor" />
-                                </Form.Group>
+                <Col md="5">
+                    <Toast show={this.state.showB} onClose={() => this.setState({ showB: false })}>
+                        <Toast.Header>
+                            <button type="button" class="close ml-2" data-dismiss="toast" />
+                        </Toast.Header>
 
-                                <Form.Row>
-                                    <Form.Group as={Col} controlId="formGridCity">
-                                        <Form.Label>City</Form.Label>
-                                        <Form.Control />
-                                    </Form.Group>
+                        <Calendar />
 
-                                    <Form.Group as={Col} controlId="formGridState">
-                                        <Form.Label>State</Form.Label>
-                                        <Form.Control as="select">
-                                            <option>Choose...</option>
-                                            <option>...</option>
-                                        </Form.Control>
-                                    </Form.Group>
+                    </Toast>
+                </Col>
+            </Row>
 
-                                    <Form.Group as={Col} controlId="formGridZip">
-                                        <Form.Label>Zip</Form.Label>
-                                        <Form.Control />
-                                    </Form.Group>
-                                </Form.Row>
-
-                                <Form.Group id="formGridCheckbox">
-                                    <Form.Check type="checkbox" label="Check me out" />
-                                </Form.Group>
-
-                                <Button variant="primary" type="submit">
-                                    Submit
-                                </Button>
-                            </Form>
-                        </Row>
-                    </Col>
-                </Row>
-            </div>
-        )
+        );
     }
 }
 export default Admin;

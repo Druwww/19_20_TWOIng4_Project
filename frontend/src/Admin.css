@@ -1,11 +1,25 @@
-.Row{
-  background: #3494E6;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #EC6EAD, #3494E6);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #EC6EAD, #3494E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height:100%;
+.userList{
+  font-size: 1em;
+  margin-right: 1em;
+  height:50em;
+  margin-top: 4em;
+  margin-left: 200em;
+  text-align:center;
+  background-color: white;
+  border-radius: 5%;
+  opacity:.9;
+  box-shadow: 10px 5px 5px crimson;
+  height: 20%;
 }
 
-.formFormat{
-  margin-left: 5em;
+.widgetCal{
+  text-align: center;
+  background-color: black;
+  box-shadow: 10px 5px 5px crimson;
+  border-radius: 5%;
+  opacity:.9;
+  height: 15em;
+  margin-right: 1em;
+  margin-left: 1em;
   margin-top: 1em;
 }
