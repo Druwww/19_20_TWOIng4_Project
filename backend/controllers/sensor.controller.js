@@ -325,8 +325,11 @@ exports.lastSensors = (req, res) => {
         });
       }
       sensor.length = req.body.numberSensors;
-      sensor.sort(function(a,b){return (new Date(a.creationDate)) < (new Date(b.creationDate))})
-      // sensor.reverse();
+
+
+      // sensor.sort(function(a,b){return (new Date(a.creationDate)) > (new Date(b.creationDate))})
+      
+      
       console.log(sensor);
       res.send(sensor);
     })
