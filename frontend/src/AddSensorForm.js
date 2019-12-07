@@ -1,12 +1,12 @@
 import React from 'react';
 import { Form, Row, Col, Button, Toast } from 'react-bootstrap';
 
-class AddUserForm extends React.Component{
-    render(){
-        return(
+class AddSensorForm extends React.Component {
+    render() {
+        return (
             <div>
                 <Row>
-                    <Col>                    
+                    <Col>
                         <Form className="formFormat">
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formGridEmail">
@@ -58,7 +58,7 @@ class AddUserForm extends React.Component{
                                 Submit
                             </Button>
                         </Form>
-                 
+
                     </Col>
                 </Row>
             </div>
@@ -67,4 +67,4 @@ class AddUserForm extends React.Component{
     }
 }
 
-export default AddUserForm;
+export default AddSensorForm;

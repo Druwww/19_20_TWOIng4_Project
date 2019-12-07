@@ -1,25 +1,28 @@
 .userList{
-  font-size: 1em;
-  margin-right: 1em;
-  height:50em;
-  margin-top: 4em;
-  margin-left: 200em;
-  text-align:center;
   background-color: white;
+  box-shadow: 10px 5px 5px crimson;
   border-radius: 5%;
   opacity:.9;
-  box-shadow: 10px 5px 5px crimson;
-  height: 20%;
+  text-align: center;
+  height: 15em;
+  margin-top: 2em;
+  margin-left: 2em;
+  padding-top: 1em;
 }
 
-.widgetCal{
-  text-align: center;
-  background-color: black;
+.user{
+  font-size: 1,5em;
+  font-weight:bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userForm{
   box-shadow: 10px 5px 5px crimson;
   border-radius: 5%;
   opacity:.9;
-  height: 15em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-top: 1em;
+  text-align: center;
+  margin-top: 2.5em;
+  margin-left: 2em;
+  padding-top: 1em;
 }
