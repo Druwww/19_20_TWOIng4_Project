@@ -291,3 +291,59 @@ exports.sensorsLocation = (req, res) => {
 
   });
 }
+
+exports.lastSensors = (req, res) => {
+
+  if (!req.body.numberSensors) {
+    // If firstName is not present in body reject the request by
+    // sending the appropriate http code
+    return res.status(400).send({
+      message: 'type can not be empty'
+    });
+  }
+
+  if(req.body){
+    var diffParams = {};
+
+    if(req.body.location){
+      diffParams.location = req.body.location;
+    }
+
+    if(req.body.creationDate){
+      diffParams.creationDate = req.body.creationDate;
+    }
+    
+    if(req.body.userID){
+      diffParams.userID = req.body.userID;
+    }
+
+    Sensor.find(diffParams).sort({ creationDate: -1 })
+    .then(sensor => {
+      if (!sensor) {
+        return res.status(404).send({
+          message: 'Sensor not found with thoses params ' + diffParams
+        });
+      }
+      sensor.length = req.body.numberSensors;
+      sensor.sort(function(a,b){return (new Date(a.creationDate)) < (new Date(b.creationDate))})
+      // sensor.reverse();
+      console.log(sensor);
+      res.send(sensor);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Sensor not found with thoses params ' +diffParams
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving sensor with thoses params' + diffParams
+      });
+    });
+  }
+  else{
+    return res.status(404).send({
+      message: 'No params in request'
+    });
+  }
+};

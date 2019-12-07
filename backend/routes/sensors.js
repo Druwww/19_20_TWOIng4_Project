@@ -10,4 +10,7 @@ router.get('/numberSensors', sensor.numberSensors);
 
 router.get('/sensorsLocation', sensor.sensorsLocation);
 
+router.get('/lastSensors', sensor.lastSensors);
+
+
 module.exports = router;
