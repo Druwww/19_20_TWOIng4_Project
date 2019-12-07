@@ -17,6 +17,8 @@ const sensorRouter = require('./routes/sensor');
 const sensorsRouter = require('./routes/sensors');
 const measureRouter = require('./routes/measure');
 const measuresRouter = require('./routes/measures');
+const askMeRouter = require('./routes/askMe');
+
 
 var app = express();
 
@@ -33,5 +35,6 @@ app.use("/measure", measureRouter);
 app.use("/measures", measuresRouter);
 app.use("/sensor", sensorRouter);
 app.use("/sensors", sensorsRouter);
+app.use("/askMe", askMeRouter);
 
 module.exports = app;
