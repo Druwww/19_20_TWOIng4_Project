@@ -28,5 +28,4 @@ And for the Satistif use the route : /askMe
 In the body put some true for the stat you want
 
 - numberSensor : true
-        Will return the number of Sensor in a body { numberSensor : <value>}
-        
+        Will return the number of Sensor in a body { numberSensor : $value}
