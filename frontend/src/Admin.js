@@ -39,7 +39,6 @@ class Admin extends React.Component {
                             <Button onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
                         </Toast.Header>
                         <UserList/>
-
                     </Toast>
                 </Col>
 
