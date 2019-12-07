@@ -27,3 +27,4 @@ Each one with a CRUD
 And for the Satistics and particular requests :
 
 -sensors/numberSensors : return number of sensors in numberSensors
+-measures/lastMeasures : return numberMeasures in body last measurer from all collection

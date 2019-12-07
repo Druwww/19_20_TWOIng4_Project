@@ -4,7 +4,6 @@ const Measure = require('../models/measure.model.js');
 exports.findAll = (req, res) => {
   Measure.find()
     .then(sensor => {
-      console.log(sensor);
       res.send(sensor);
     })
     .catch(err => {
@@ -222,4 +221,29 @@ exports.delete = (req, res) => {
         message: 'Could not delete measure with id ' + req.body.measureId
       });
     });
+};
+
+exports.lastMeasures = (req, res) => {
+
+  // Validate request
+  if (!req.body.numberMeasures) {
+    // If firstName is not present in body reject the request by
+    // sending the appropriate http code
+    return res.status(400).send({
+      message: 'type can not be empty'
+    });
+  }
+
+  Measure.find().sort({ creationDate: -1 })
+    .then(measures => {
+      measures.length = req.body.numberMeasures;
+
+      res.send(measures);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving sensor.'
+      });
+    });
+
 };
