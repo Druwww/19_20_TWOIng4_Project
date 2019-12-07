@@ -8,6 +8,7 @@ import Number from './Number.js';
 import './Number.css'
 import Calendar from './Calendar.js';
 import './Calendar.css';
+import SocialNetwork from './SocialNetwork.js';
 
 var dataTasks = [{ name: "task 1", description: "ma description ouf" }, { name: "task 2", description: "The description ouf qui est beaucoup trop long donc elle va durer super mega longtemps lol mdrrr" }];
 
@@ -17,24 +18,26 @@ class Home extends React.Component {
         return (
             <div>
                 <Row>
-                    <Col md='8' className="mainWidget">
+                    <Col md='8'className="mainWidget">
                         <Row>
                             <Col className="widgetList"><Todo tasks={dataTasks}></Todo></Col>
-                            <Col className="widgetTreso"><Graph></Graph></Col>
+                            <Col className="widgetTreso"><Graph/></Col>
                         </Row>
                         <Row>
                             <Col className="widgetNumberSensor">
-                                <Number sensorsNumber="4"></Number>
+                                <Number sensorsNumber="4"/>
                             </Col >
-                            <Col className="widgetBudget"><Camembert></Camembert></Col>
+                            <Col className="widgetBudget"><Camembert/></Col>
                         </Row>
                         <Row>
                             <Col className="widgetCal">
-                                <Calendar></Calendar>
+                                <Calendar/>
                             </Col>
                         </Row>
                     </Col>
-                    <Col className="mainWidget">réseaux sociaux</Col>
+                    <Col md='3' className="widgetSocial">
+                        <SocialNetwork/>
+                    </Col>
                 </Row>
             </div>
         );
