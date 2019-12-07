@@ -209,3 +209,28 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+exports.numberSensors = (req, res) => {
+  Sensor.count()
+        
+  .then(numberSensor => {
+    if (!numberSensor) {
+      return res.status(404).send({
+        message: 'Error in numberSensor'
+      });
+    }
+    
+    res.send({numberSensor});
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Error 1'
+        });
+      }
+            
+      return res.status(500).send({
+        message: 'Error 2'
+      });
+    });
+};
