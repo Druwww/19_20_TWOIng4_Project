@@ -8,4 +8,6 @@ router.get('/', sensor.findAll);
 // Get Number of sensors
 router.get('/numberSensors', sensor.numberSensors);
 
+router.get('/sensorsLocation', sensor.sensorsLocation);
+
 module.exports = router;
