@@ -15,7 +15,7 @@ var dataTasks = [{ name: "task 1", description: "ma description ouf" }, { name: 
 class Home extends React.Component {
     render() {
         return (
-            <div className="background">
+            <div>
                 <Row>
                     <Col md='8' className="mainWidget">
                         <Row>
@@ -23,13 +23,15 @@ class Home extends React.Component {
                             <Col className="widgetTreso"><Graph></Graph></Col>
                         </Row>
                         <Row>
-                            <Col className="widgetCal">Widget Semaine
-                                <Calendar></Calendar>
-                            </Col>
                             <Col className="widgetNumberSensor">
                                 <Number sensorsNumber="4"></Number>
                             </Col >
                             <Col className="widgetBudget"><Camembert></Camembert></Col>
+                        </Row>
+                        <Row>
+                            <Col className="widgetCal">
+                                <Calendar></Calendar>
+                            </Col>
                         </Row>
                     </Col>
                     <Col className="mainWidget">réseaux sociaux</Col>

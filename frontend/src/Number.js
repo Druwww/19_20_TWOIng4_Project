@@ -19,9 +19,9 @@ class Number extends React.Component {
     render() {
         return (
             <div>
-                <p className="simpleText">Vous avez :</p>
+                <p className="simpleText"><strong>Vous avez :</strong></p>
                 <p className = "sensorNumber"> {this.props.sensorsNumber}</p>
-                <p className="simpleText"> capteurs installés !</p>               
+                <p className="simpleText"> <strong>utilisateurs !</strong></p>               
             </div>
         );
     }
