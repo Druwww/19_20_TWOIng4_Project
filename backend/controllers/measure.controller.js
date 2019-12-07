@@ -247,3 +247,62 @@ exports.lastMeasures = (req, res) => {
     });
 
 };
+
+
+exports.lastMeasure = (req, res) => {
+
+  // Validate request
+  if (!req.body.numberMeasures) {
+    // If firstName is not present in body reject the request by
+    // sending the appropriate http code
+    return res.status(400).send({
+      message: 'type can not be empty'
+    });
+  }
+
+  if(req.body){
+    var diffParams = {};
+
+    if(req.body.type){
+      diffParams.type = req.body.type;
+    }
+
+    if(req.body.creationDate){
+      diffParams.creationDate = req.body.creationDate;
+    }
+    
+    if(req.body.sensorID){
+      diffParams.sensorID = req.body.sensorID;
+    }
+
+    if(req.body.value){
+      diffParams.value = req.body.value;
+    }
+
+    Measure.find(diffParams).sort({ creationDate: -1 })
+    .then(measure => {
+      if (!measure) {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params ' + diffParams
+        });
+      }
+      measure.length = req.body.numberMeasures;
+      res.send(measure);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params ' +diffParams
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving measure with thoses params' + diffParams
+      });
+    });
+  }
+  else{
+    return res.status(404).send({
+      message: 'No params in request'
+    });
+  }
+};

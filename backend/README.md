@@ -28,3 +28,4 @@ And for the Satistics and particular requests :
 
 -sensors/numberSensors : return number of sensors in numberSensors
 -measures/lastMeasures : return numberMeasures in body last measurer from all collection
+-measure/lastMeasure : return numberMeasures(in body) last measurer from all the param give in the body (like get measure)
