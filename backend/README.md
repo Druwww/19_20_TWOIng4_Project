@@ -24,8 +24,11 @@ Each one with a CRUD
 - U with the body : only the value you want to change with id
 - D with id
 
-And for the Satistif use the route : /askMe
-In the body put some true for the stat you want
+And for the Satistics and particular requests :
 
-- numberSensor : true
-        Will return the number of Sensor in a body { numberSensor : $value}
+-sensors/numberSensors : return number of sensors in numberSensors
+-sensors/lastSensors : return the n last sensor created in time (n define in the body by numberSensors)
+-measures/lastMeasures : return numberMeasures in body last measurer from all collection
+-measure/lastMeasure : return numberMeasures(in body) last measurer from all the param give in the body (like get measure)
+-measures/timeMeasures : return a list of hours and number of measure done at this hours
+-measures/timeMeasuresType : same but in the body you specify the type of measure (humidity, temperature, ...)

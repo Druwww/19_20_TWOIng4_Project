@@ -4,7 +4,6 @@ const Measure = require('../models/measure.model.js');
 exports.findAll = (req, res) => {
   Measure.find()
     .then(sensor => {
-      console.log(sensor);
       res.send(sensor);
     })
     .catch(err => {
@@ -220,6 +219,167 @@ exports.delete = (req, res) => {
       }
       return res.status(500).send({
         message: 'Could not delete measure with id ' + req.body.measureId
+      });
+    });
+};
+
+exports.lastMeasures = (req, res) => {
+
+  // Validate request
+  if (!req.body.numberMeasures) {
+    // If firstName is not present in body reject the request by
+    // sending the appropriate http code
+    return res.status(400).send({
+      message: 'type can not be empty'
+    });
+  }
+
+  Measure.find().sort({ creationDate: -1 })
+    .then(measures => {
+      measures.length = req.body.numberMeasures;
+
+      res.send(measures);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving sensor.'
+      });
+    });
+
+};
+
+
+exports.lastMeasure = (req, res) => {
+
+  // Validate request
+  if (!req.body.numberMeasures) {
+    // If firstName is not present in body reject the request by
+    // sending the appropriate http code
+    return res.status(400).send({
+      message: 'type can not be empty'
+    });
+  }
+
+  if(req.body){
+    var diffParams = {};
+
+    if(req.body.type){
+      diffParams.type = req.body.type;
+    }
+
+    if(req.body.creationDate){
+      diffParams.creationDate = req.body.creationDate;
+    }
+    
+    if(req.body.sensorID){
+      diffParams.sensorID = req.body.sensorID;
+    }
+
+    if(req.body.value){
+      diffParams.value = req.body.value;
+    }
+
+    Measure.find(diffParams).sort({ creationDate: -1 })
+    .then(measure => {
+      if (!measure) {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params ' + diffParams
+        });
+      }
+      measure.length = req.body.numberMeasures;
+      res.send(measure);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params ' +diffParams
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving measure with thoses params' + diffParams
+      });
+    });
+  }
+  else{
+    return res.status(404).send({
+      message: 'No params in request'
+    });
+  }
+};
+
+exports.timeMeasures = (req, res) => {
+
+  
+
+  Measure.find()
+    .then(measure => {
+      var valeursHeures = [];
+
+      for(var i = 0; i<24; i++){
+        valeursHeures[i] = 0;
+      }
+
+      for(var i = 0; i < measure.length; i++){
+        const maDate = new Date(measure[i].creationDate);
+        valeursHeures[maDate.getHours()] += 1;
+      }
+
+      var values = {};
+
+      for(var i = 0; i < 24; i++){
+        values[i] = valeursHeures[i];
+      }
+      res.send(values);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving sensor.'
+      });
+    });
+};
+
+exports.timeMeasuresType = (req, res) => {
+
+  if (!req.body.type) {
+    // If firstName is not present in body reject the request by
+    // sending the appropriate http code
+    return res.status(400).send({
+      message: 'type can not be empty'
+    });
+  }
+
+  var diffParam = {
+    type : req.body.type
+  }
+
+  Measure.find(diffParam)
+    .then(measure => {
+      var valeursHeures = [];
+
+      for(var i = 0; i<24; i++){
+        valeursHeures[i] = 0;
+      }
+
+      for(var i = 0; i < measure.length; i++){
+        const maDate = new Date(measure[i].creationDate);
+        valeursHeures[maDate.getHours()] += 1;
+      }
+
+      var values = {};
+
+      for(var i = 0; i < 24; i++){
+        values[i] = valeursHeures[i];
+      }
+      res.send(values);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params '
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving measure with thoses params'
       });
     });
 };

@@ -1,4 +1,6 @@
 const Sensor = require('../models/sensor.model.js');
+const axios = require('axios');
+
 
 // Retrieve and return all Users from the database.
 exports.findAll = (req, res) => {
@@ -208,4 +210,143 @@ exports.delete = (req, res) => {
         message: 'Could not delete sensor with id ' + req.body.sensorId
       });
     });
+};
+
+exports.numberSensors = (req, res) => {
+  Sensor.count()
+        
+  .then(numberSensor => {
+    if (!numberSensor) {
+      return res.status(404).send({
+        message: 'Error in numberSensor'
+      });
+    }
+    
+    res.send({numberSensor});
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Error 1'
+        });
+      }
+            
+      return res.status(500).send({
+        message: 'Error 2'
+      });
+    });
+};
+
+function countSensorLocation(location){
+  Sensor.count({'location' : location}).lean()    
+      .then(numberSensor => {
+          if (!numberSensor) {
+            return res.status(404).send({
+              message: 'Error in loop'
+            });
+          }
+
+        arrayNumberSensorLocation.push({location, numberSensor})
+        console.log(arrayNumberSensorLocation);
+      });
+}
+
+exports.sensorsLocation = (req, res) => {
+
+  var location = Sensor.distinct('location')
+  .then(listAllLocation => {
+    if (!listAllLocation) {
+      return res.status(404).send({
+        message: 'Error in listAllLocation'
+      });
+    }
+
+    res.send(listAllLocation);
+
+    //Aide pour récuperation nombre de capteur par localisation
+    // var aidePierre = [];
+
+    // for(var local in listAllLocation){
+    //     axios({
+    //     method: 'get',
+    //     url: 'http://localhost:3000/sensor',
+    //     data: {
+    //       location: 'entrance'
+    //     }
+    //   })
+    //   .then(response => {
+
+    //     var total = 0;
+
+    //     for(var i in response.data){
+    //       total++;
+    //     }
+        
+    //     aidePierre.push(local,total);
+    //   });
+      
+    // }
+    // console.log(aidePierre);
+
+
+  });
+}
+
+exports.lastSensors = (req, res) => {
+
+  if (!req.body.numberSensors) {
+    // If firstName is not present in body reject the request by
+    // sending the appropriate http code
+    return res.status(400).send({
+      message: 'type can not be empty'
+    });
+  }
+
+  if(req.body){
+    var diffParams = {};
+
+    if(req.body.location){
+      diffParams.location = req.body.location;
+    }
+
+    if(req.body.creationDate){
+      diffParams.creationDate = req.body.creationDate;
+    }
+    
+    if(req.body.userID){
+      diffParams.userID = req.body.userID;
+    }
+
+    Sensor.find(diffParams).sort({ creationDate: -1 })
+    .then(sensor => {
+      if (!sensor) {
+        return res.status(404).send({
+          message: 'Sensor not found with thoses params ' + diffParams
+        });
+      }
+      sensor.length = req.body.numberSensors;
+
+
+      // sensor.sort(function(a,b){return (new Date(a.creationDate)) > (new Date(b.creationDate))})
+      
+      
+      console.log(sensor);
+      res.send(sensor);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Sensor not found with thoses params ' +diffParams
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving sensor with thoses params' + diffParams
+      });
+    });
+  }
+  else{
+    return res.status(404).send({
+      message: 'No params in request'
+    });
+  }
 };

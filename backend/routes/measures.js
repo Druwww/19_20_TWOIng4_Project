@@ -5,4 +5,11 @@ var measure = require('../controllers/measure.controller');
 /* GET measure listing. */
 router.get('/', measure.findAll);
 
+//Return n last measures from collection
+router.get('/lastMeasures', measure.lastMeasures);
+
+router.get('/timeMeasures', measure.timeMeasures);
+
+router.get('/timeMeasuresType', measure.timeMeasuresType);
+
 module.exports = router;
