@@ -24,11 +24,20 @@ Each one with a CRUD
 - U with the body : only the value you want to change with id
 - D with id
 
-And for the Satistics and particular requests :
+And for the Satistics and particular requests
 
--sensors/numberSensors : return number of sensors in numberSensors
--sensors/lastSensors : return the n last sensor created in time (n define in the body by numberSensors)
--measures/lastMeasures : return numberMeasures in body last measurer from all collection
--measure/lastMeasure : return numberMeasures(in body) last measurer from all the param give in the body (like get measure)
--measures/timeMeasures : return a list of hours and number of measure done at this hours
--measures/timeMeasuresType : same but in the body you specify the type of measure (humidity, temperature, ...)
+- users/personsInHouse : return how many user got 1 personInHouse, 2, 3,...,6
+
+- sensors/numberSensors : return number of sensors in numberSensors
+
+- sensors/lastSensors : return the n last sensor created in time (n define in the body by numberSensors)
+
+- sensors/sensorsLocation : return a list of all location possible
+
+- measures/lastMeasures : return numberMeasures in body last measurer from all collection
+
+- measure/lastMeasure : return numberMeasures(in body) last measurer from all the param give in the body (like get measure)
+
+- measures/timeMeasures : return a list of hours and number of measure done at this hours
+
+- measures/timeMeasuresType : same but in the body you specify the type of measure (humidity, temperature, ...)
