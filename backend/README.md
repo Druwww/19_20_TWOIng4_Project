@@ -26,6 +26,8 @@ Each one with a CRUD
 
 And for the Satistics and particular requests
 
+- users/personsInHouse : return how many user got 1 personInHouse, 2, 3,...,6
+
 - sensors/numberSensors : return number of sensors in numberSensors
 
 - sensors/lastSensors : return the n last sensor created in time (n define in the body by numberSensors)

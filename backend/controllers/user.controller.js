@@ -207,3 +207,33 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+exports.numberPersonsInHouse = (req, res) => {
+
+  User.find()
+    .then(users => {
+      
+      var valeursPersonnes = [];
+
+      for(var i = 0; i<6; i++){
+        valeursPersonnes[i] = 0;
+      }
+
+      for(var i = 0; i < users.length; i++){
+        valeursPersonnes[users[i].personsInHouse - 1] += 1;
+      }
+
+      var values = {};
+
+      for(var i = 0; i <  6; i++){
+        values[i + 1] = valeursPersonnes[i];
+      }
+      res.send(values);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving users.'
+      });
+    });
+
+};
