@@ -1,0 +1,83 @@
+.mainWidget{
+  font-size: 1em;
+  margin-right: 1em;
+  height:auto;
+  margin-top: 2em;
+  margin-left: 2em;
+}
+
+.widgetList{
+  text-align:center;
+  background-color: white;
+  border-radius: 5%;
+  opacity:.9;
+  box-shadow: 10px 5px 5px crimson;
+  height: auto;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+  padding-top: 4em;
+}
+
+.widgetTreso{
+  text-align: center;
+  background-color: white;
+  box-shadow: 10px 5px 5px crimson;
+  border-radius: 5%;
+  opacity:.9;
+  height: auto;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+.widgetCal{
+  text-align: center;
+  background-color: white;
+  box-shadow: 10px 5px 5px crimson;
+  border-radius: 5%;
+  opacity:.9;
+  height: auto;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.widgetNumberSensor{
+  background-color: white;
+  box-shadow: 10px 5px 5px crimson;
+  border-radius: 5%;
+  opacity:.9;
+  height: auto;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+.widgetBudget{
+  text-align: center;
+  background-color: white;
+  box-shadow: 10px 5px 5px crimson;
+  border-radius: 5%;
+  opacity:.9;
+  height: auto;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+.widgetSocial{
+  text-align: center;
+  background-color: white;
+  box-shadow: 10px 5px 5px crimson;
+  border-radius: 5%;
+  opacity:.9;
+  height: 20em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 3.2em;
+  padding-top: 1em;
+}
