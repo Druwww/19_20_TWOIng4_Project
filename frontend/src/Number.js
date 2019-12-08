@@ -26,7 +26,7 @@ class Number extends React.Component {
             <div>
                 <p className="simpleText"><strong>Vous avez :</strong></p>
                 <p className = "sensorNumber"> {this.state.numberSensor}</p>
-                <p className="simpleText"> <strong>Capteur !</strong></p>               
+                <p className="simpleText"> <strong>Capteurs !</strong></p>               
             </div>
         );
     }
