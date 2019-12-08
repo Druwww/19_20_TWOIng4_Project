@@ -1,32 +1,7 @@
-ol, ul {
-  padding-left: 30%;
-}
-
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
-.square {
-  border: 1px solid #999;
-  float: left;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 40px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 60px;
-}
-
-.square:focus {
-  outline: none;
-}
-
 .calendar{
-  margin-top: 3%;
-  margin-left: 2%;  
+  margin-top: 3em;
+  margin-left: 2em;
+  margin-bottom: 3em;
+  width:80%;
+  height: 80%;
 }

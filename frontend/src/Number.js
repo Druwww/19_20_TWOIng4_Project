@@ -1,27 +1,32 @@
 import React from 'react';
 import './App.css';
 import './Number.css';
-import { Container, Row, Col } from 'react-bootstrap';
+const axios = require('axios');
 
-/*To use : 
-<Col className="widgetNumberSensor"> 
-    <Number sensorsNumber="4"></Number>
-</Col >
-*/
-const sensorsNumber = '0';
 
 class Number extends React.Component {
 
     constructor(props){
         super(props);
 
+        this.state = {
+            numberSensor : 0
+        }
+    }
+    componentDidMount(){
+        axios.get('http://localhost:3000/sensors/numberSensors')
+        .then(response => {
+            console.log(response.data.numberSensor);
+
+            this.setState({numberSensor : response.data.numberSensor});
+        });
     }
     render() {
         return (
             <div>
-                <p className="simpleText">Vous avez :</p>
-                <p className = "sensorNumber"> {this.props.sensorsNumber}</p>
-                <p className="simpleText"> capteurs installés !</p>               
+                <p className="simpleText"><strong>Vous avez :</strong></p>
+                <p className = "sensorNumber"> {this.state.numberSensor}</p>
+                <p className="simpleText"> <strong>Capteurs !</strong></p>               
             </div>
         );
     }

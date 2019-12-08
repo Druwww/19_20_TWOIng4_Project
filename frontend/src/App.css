@@ -1,62 +1,6 @@
 .App {
   text-align: center;
-}
-
-
-.menuBar{
-  font-size: 1em;
-  background-color: blue;
-  width: auto;
-  height: 5em;
-  text-align: center;
-  margin-top: 1em;
-
-}
-
-.mainWidget{
-  font-size: 1em;
-  margin-right: 1em;
-  height:30em;
-  background-color: grey;
-  margin-top: 1em;
-}
-
-.widgetList{
-  background-color: white;
-  height: 15em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-top: 1em;
-}
-
-.widgetTreso{
-  background-color: white;
-  height: 15em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-top: 1em;
-}
-
-.widgetCal{
-  background-color: white;
-  height: 10em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-top: 1em;
-}
-
-.widgetNumberSensor{
-  background-color: white;
-  height: 10em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-top: 1em;
-}
-
-.widgetBudget{
-  background-color: white;
-  height: 10em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-top: 1em;
+  background: #3494E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #EC6EAD, #3494E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #EC6EAD, #3494E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
