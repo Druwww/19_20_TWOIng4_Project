@@ -25,7 +25,7 @@ class Home extends React.Component {
                         </Row>
                         <Row>
                             <Col className="widgetNumberSensor">
-                                <Number sensorsNumber="4"/>
+                                <Number sensorsNumber={4}/>
                             </Col >
                             <Col className="widgetBudget"><Camembert/></Col>
                         </Row>
