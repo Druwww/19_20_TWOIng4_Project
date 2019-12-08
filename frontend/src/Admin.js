@@ -12,8 +12,22 @@ class Admin extends React.Component {
         this.state = {
             showAddUserForm: false,
             showUserList: false,
-            showAddSensorForm: false
+            showAddSensorForm: false,
+            userID: 0
         };
+    }
+
+    createTable = () => {
+        let table = []
+
+        for (let i = 0; i < 3; i++) {
+            table.push(<tr>
+                <Button className="user" onClick={() => this.setState({ showUserList: true, userID: i})}>
+                    utilisateur
+                </Button>
+            </tr>)
+        }
+        return table
     }
 
     render(){
@@ -26,17 +40,16 @@ class Admin extends React.Component {
                                 Ajouter User
                             </Button><br></br><br></br>
                         </header>
-                        <p>
-                            <Button className="user" onClick={() => this.setState({ showUserList: true })}>
-                                utilisateur
-                            </Button>
+                        <p className="user">
+                            {this.createTable()}
                         </p>
                     </div>
                 </Col>
                 <Col md="3">
                     <Toast className="userForm" show={this.state.showUserList} onClose={() => this.setState({ showUserList: false })}>
                         <Toast.Header>
-                            <Button onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
+                            Capteurs du User {this.state.userID}
+                            <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
                         </Toast.Header>
                         <UserList/>
                     </Toast>
