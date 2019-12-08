@@ -1,0 +1,11 @@
+.simpleText{
+    text-align: center;
+    font-size: 150%;
+}
+
+.sensorNumber{
+    text-align: center;
+    color : #4da6ff;
+    font-size: 300%;
+    font-weight: bold;
+}

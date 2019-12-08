@@ -1,31 +1,44 @@
 import React from 'react';
 import './App.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import Admin from './Admin.js'
+import Home from './Home.js'
 
-function App() {
-  return (
-    <div>
-      <Container>
-        <Row>
-          <Col className="menuBar">Menu bar</Col>
-        </Row>
-        <Row>
-          <Col md='8' className="mainWidget">6 widget gauche
-            <Row>
-              <Col className="widgetList">Widget To do List</Col>
-              <Col className="widgetTreso">Widget Tresorie</Col>
-            </Row>
-            <Row>
-              <Col className="widgetCal">Widget Calendrier</Col>
-              <Col className="widgetMembre">Widget Nombre Membre</Col>
-              <Col className="widgetBudget">Widget Budget</Col>
-            </Row>
-          </Col>
-          <Col className="mainWidget">réseau sociaux</Col>
-        </Row>
-      </Container>
-    </div>
-  );
+import { Navbar, Nav } from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar.Brand href="/">Quentin et Pierre ^^</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/admin">Admin</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
+        <Switch>
+          <Route path="/admin">
+            <Admin />
+          </Route>
+
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+
+      </Router>
+    )
+  }
 }
 
 export default App;
+
