@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+const axios = require('axios');
 
 const data = [
   {
@@ -49,8 +50,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="custom-tooltip">
         <p className="label">{`${label} : ${payload[0].value}`}</p>
-        <p className="intro">{getIntroOfPage(label)}</p>
-        <p className="desc">Anything you want can be displayed here.</p>
+        <p className="desc">Nombre de capteur dans cette pièce.</p>
       </div>
     );
   }
@@ -61,12 +61,34 @@ const CustomTooltip = ({ active, payload, label }) => {
 class Graph extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/vxq4ep63/';
 
+  constructor(props){
+    super(props);
+
+    this.state = { data : []};
+  }
+
+  componentDidMount(){
+    axios.get('http://localhost:3000/sensors/sensorsLocation')
+        .then(response => {
+            var myData = [];
+            for(var x in response.data){
+
+              myData.push({name: x, nb: response.data[x]})
+
+              console.log(x);
+            }
+            // console.log(response.data.bathroom);
+            this.setState({data: myData});
+            console.log(this.state);
+        });
+  }
+
   render() {
     return (
       <BarChart
         width={500}
         height={300}
-        data={data}
+        data={this.state.data}
         margin={{
           top: 5, right: 30, left: 20, bottom: 5,
         }}
@@ -76,7 +98,7 @@ class Graph extends PureComponent {
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="pv" barSize={20} fill="#8884d8" />
+        <Bar dataKey="nb" barSize={20} fill="#8884d8" />
       </BarChart>
     );
   }
