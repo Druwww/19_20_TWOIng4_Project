@@ -4,7 +4,6 @@ const User = require('../models/user.model.js');
 exports.findAll = (req, res) => {
   User.find()
     .then(users => {
-      console.log(users);
       res.send(users);
     })
     .catch(err => {
@@ -16,6 +15,7 @@ exports.findAll = (req, res) => {
 
 // Create and Save a new User
 exports.create = (req, res) => {
+  console.log(req.body);
   // Validate request
   if (!req.body.location) {
     // If firstName is not present in body reject the request by
@@ -38,6 +38,8 @@ exports.create = (req, res) => {
       message: 'houseSize can not be empty'
     });
   }
+
+
 
   // Create a new User
   const user = new User({

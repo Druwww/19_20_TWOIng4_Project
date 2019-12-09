@@ -1,63 +1,109 @@
 import React from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, Alert } from 'react-bootstrap';
 const axios = require('axios');
 
 class AddUserForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            location:null,
-            personsInHouse: null,
-            houseSize: null
+            location: "",
+            personsInHouse: "",
+            houseSize: ""
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
+		this.onChangeNbPersons = this.onChangeNbPersons.bind(this);
+		this.onChangeHouseSize = this.onChangeHouseSize.bind(this);
     }
 
-    change = e => {
-        this.setState({
-            [e.target.name]: e.target.value
+	onChangeLocation(e){
+
+		this.setState({
+			location: e.target.value
         });
+        
+	}
 
-    };
+	onChangeNbPersons(e) {
 
-    onSubmit = () => {
+		this.setState({
+			personsInHouse: e.target.value
+        });
         
     }
+    
+	onChangeHouseSize(e) {
 
+		this.setState({
+			houseSize: e.target.value
+        });
+    }
+
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const newUser = {
+            location: this.state.location,
+			personsInHouse: this.state.personsInHouse,
+			houseSize: this.state.houseSize,
+        }
+
+        axios.put('http://localhost:3000/user', newUser)
+        .then(response => {
+            this.setState({
+                location: "",
+                personsInHouse: "",
+                houseSize: ""  
+            });
+        });
+    }
+    
     render(){
         return(
             <div>
                 <Row>
                     <Col>                    
-                        <Form className="formFormat" method="POST" onsubmit={this.handleSubmit}>
+                        <Form className="formFormat" onSubmit={this.handleSubmit}>
                             <Form.Group>
                                 <Form.Label>Adresse Personnelle</Form.Label>
                                 <Form.Control 
                                 name="location"
-                                placeholder="1234 Main St" 
+                                id="location"
+                                placeholder="France" 
+                                type="text"
                                 value={this.state.location} 
-                                onChange={e => this.change(e)}/>
+                                onChange={this.onChangeLocation}
+                                />
                             </Form.Group>
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>Nombre d'habitants</Form.Label>
                                     <Form.Control
                                     name="personsInHouse" 
-                                    type="number" 
-                                    value={this.state.personsInHouse}
-                                    onChange={e => this.change(e)}/>
+                                    id="personsInHouse"
+                                    placeholder="1, 2, ..." 
+                                    type="text"
+                                    value={this.state.personsInHouse} 
+                                    onChange={this.onChangeNbPersons}
+                                    />
                                 </Form.Group>
 
                                 <Form.Group as={Col} >
-                                    <Form.Label>Taille (m²)</Form.Label>
+                                    <Form.Label>Taille</Form.Label>
                                     <Form.Control
                                     name="houseSize"
-                                    type="number" 
+                                    id="houseSize"
+                                    placeholder="small, medium, big" 
+                                    type="text"
                                     value={this.state.houseSize} 
-                                    onChange={e => this.change(e)}/>
+                                    onChange={this.onChangeHouseSize}
+                                    />
                                 </Form.Group>
                             </Form.Row>
 
-                            <Button variant="primary" type ="submit" onClick={() => this.onsubmit()}>
+                            <Button variant="primary" type="submit">
                                 Submit
                             </Button>
                         </Form>

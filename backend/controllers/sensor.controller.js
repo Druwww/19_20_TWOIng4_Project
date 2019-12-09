@@ -71,6 +71,8 @@ exports.create = (req, res) => {
 // Find a single User with a UserId
 exports.findOne = (req, res) => {
 
+  console.log(req.params);
+
   //If id is pass in request
   if(req.body.sensorId){
     Sensor.findById(req.body.sensorId)
@@ -106,6 +108,12 @@ exports.findOne = (req, res) => {
     if(req.body.userID){
       diffParams.userID = req.body.userID;
     }
+
+    if(req.params.userID){
+      diffParams.userID = req.params.userID;
+    }
+
+    console.log(diffParams);
 
     Sensor.find(diffParams)
     .then(sensor => {
@@ -302,13 +310,17 @@ exports.lastSensors = (req, res) => {
           message: 'Sensor not found with thoses params ' + diffParams
         });
       }
-      sensor.length = 3;
 
+        if (req.body.numberSensors) {
+          // If firstName is not present in body reject the request by
+          // sending the appropriate http code
+          sensor.length = req.body.numberSensors;
+          
+        }
+        else{
+          sensor.length = 3;
+        }
 
-      // sensor.sort(function(a,b){return (new Date(a.creationDate)) > (new Date(b.creationDate))})
-      
-      
-      console.log(sensor);
       res.send(sensor);
     })
     .catch(err => {

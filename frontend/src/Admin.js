@@ -5,6 +5,8 @@ import AddSensorForm from './AddSensorForm.js';
 import UserList from './UserList.js';
 import {Row, Col, Button, Toast, Form} from 'react-bootstrap';
 import './Admin.css';
+const axios = require('axios');
+
 
 class Admin extends React.Component {
     constructor(props){
@@ -13,21 +15,18 @@ class Admin extends React.Component {
             showAddUserForm: false,
             showUserList: false,
             showAddSensorForm: false,
+            listUser : [],
+            listSensor : [],
             userID: 0
         };
     }
 
-    createTable = () => {
-        let table = []
-
-        for (let i = 0; i < 3; i++) {
-            table.push(<tr>
-                <Button className="user" onClick={() => this.setState({ showUserList: true, userID: i})}>
-                    utilisateur
-                </Button>
-            </tr>)
-        }
-        return table
+    componentDidMount(){
+        axios.get('http://localhost:3000/users')
+        .then(response => {
+            this.setState({listUser : response.data});
+            console.log(this.state.listUser);
+        });
     }
 
     render(){
@@ -41,7 +40,12 @@ class Admin extends React.Component {
                             </Button><br></br><br></br>
                         </header>
                         <p className="user">
-                            {this.createTable()}
+                            
+                        {this.state.listUser.map(({ _id, location, houseSize, personsInHouse}) => (
+                            <Button className="user" onClick={() => this.setState({ showUserList: true, userID: _id})}>
+                                    {_id}
+                            </Button>
+                        ))}
                         </p>
                     </div>
                 </Col>
@@ -51,7 +55,7 @@ class Admin extends React.Component {
                             Capteurs du User {this.state.userID}
                             <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
                         </Toast.Header>
-                        <UserList/>
+                        <UserList userID={this.state.userID}/>
                     </Toast>
                 </Col>
 
