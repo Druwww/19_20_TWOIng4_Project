@@ -252,13 +252,7 @@ exports.lastMeasures = (req, res) => {
 exports.lastMeasure = (req, res) => {
 
   // Validate request
-  if (!req.body.numberMeasures) {
-    // If firstName is not present in body reject the request by
-    // sending the appropriate http code
-    return res.status(400).send({
-      message: 'type can not be empty'
-    });
-  }
+  
 
   if(req.body){
     var diffParams = {};
@@ -286,7 +280,15 @@ exports.lastMeasure = (req, res) => {
           message: 'Measure not found with thoses params ' + diffParams
         });
       }
-      measure.length = req.body.numberMeasures;
+
+      if (req.body.numberMeasures) {
+        // If firstName is not present in body reject the request by
+        // sending the appropriate http code
+        measure.length = req.body.numberMeasures;
+      }else{
+        measure.length = 17;
+
+      }
       res.send(measure);
     })
     .catch(err => {

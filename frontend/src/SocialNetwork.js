@@ -1,27 +1,70 @@
 import React, { Component } from 'react';
 import { Row, Col, Toast } from 'react-bootstrap';
+const axios = require('axios');
+
 
 class SocialNetwork extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            data : [],
+            show : []
+        }
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:3000/measure/lastMeasure')
+        .then(response => {
+            //limit for ce moment
+            var showIni = {};
+            var i = 0;
+
+            for(var x in response.data){
+                i++;
+                if(i < 10){
+                    showIni[x._id] = true;
+                }else{
+                    showIni[x._id] = false;
+                }
+            }
+
+            this.setState({data: response.data, show : showIni});
+        });
+    }
+
     render() {
         return (
             <div>
                 <Row>
-                    <Col>
-                        <Toast show={true}>
-                            <Toast.Header>
-                                <img
-                                    src="holder.js/20x20?text=%20"
-                                    className="rounded mr-2"
-                                    alt=""
-                                />
-                                <strong className="mr-auto">Bootstrap</strong>
-                                <small>11 mins ago</small>
-                            </Toast.Header>
-                            <Toast.Body>
-                                Nouvelle notification !
-                            </Toast.Body>
-                        </Toast>
-                    </Col>
+
+                    {this.state.data.map(({ _id, creationDate, type, sensorID, value }) => (
+
+                        <Col>
+                            <Toast show={this.state.show[_id]} onClose={() =>
+                                {
+                                    var newData = this.state.show;
+                                    newData[_id] = false;
+                                    this.setState({show : newData});
+                                }
+                                }>
+                                <Toast.Header> 
+                                    <img
+                                        src="holder.js/20x20?text=%20"
+                                        className="rounded mr-2"
+                                        alt=""
+                                    />
+                                    <strong className="mr-auto">{_id}</strong>
+                                    <small>{creationDate}</small>
+                                </Toast.Header>
+                                <Toast.Body>
+                                    {type} : {value}
+                                </Toast.Body>
+                            </Toast>
+                        </Col>
+
+                    ))}
                 </Row>
             </div>
         );
