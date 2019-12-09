@@ -272,13 +272,13 @@ exports.sensorsLocation = (req, res) => {
 
 exports.lastSensors = (req, res) => {
 
-  if (!req.body.numberSensors) {
-    // If firstName is not present in body reject the request by
-    // sending the appropriate http code
-    return res.status(400).send({
-      message: 'type can not be empty'
-    });
-  }
+  // if (!req.params.numberSensors) {
+  //   // If firstName is not present in body reject the request by
+  //   // sending the appropriate http code
+  //   return res.status(400).send({
+  //     message: 'type can not be empty'
+  //   });
+  // }
 
   if(req.body){
     var diffParams = {};
@@ -302,7 +302,7 @@ exports.lastSensors = (req, res) => {
           message: 'Sensor not found with thoses params ' + diffParams
         });
       }
-      sensor.length = req.body.numberSensors;
+      sensor.length = 3;
 
 
       // sensor.sort(function(a,b){return (new Date(a.creationDate)) > (new Date(b.creationDate))})
