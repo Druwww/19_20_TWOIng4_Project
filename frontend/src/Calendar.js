@@ -81,10 +81,10 @@ export default class Example extends PureComponent {
                     backgroundColor: '#fff', border: '1px solid #999', margin: 0, padding: 10,
                 }}
                 >
-                    <p>{data.name} heures</p>
+                    <p>À {data.name} heures</p>
                     <p>
-                        <span>value: </span>
                         {data.value}
+                        <span> mesures prises </span>
                     </p>
                 </div>
             );
@@ -100,7 +100,7 @@ export default class Example extends PureComponent {
         const range = [16, 225];
 
         return (
-            <div className="calendar">
+            <div className="calendar" style={{ width: '80%', height: '60%' }}>
                 <ScatterChart
                     width={800}
                     height={60}
@@ -156,6 +156,9 @@ export default class Example extends PureComponent {
                     <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
                     <Scatter data={this.state.data4} fill="#8884d8" />
                 </ScatterChart>
+
+                <p text-align="center"><strong>MESURES PRISES PAR HEURES</strong></p>
+
             </div>
         );
     }

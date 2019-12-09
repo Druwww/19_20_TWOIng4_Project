@@ -8,8 +8,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active) {
     return (
       <div className="custom-tooltip">
-        <p className="label">{`${label} : ${payload[0].value}`}</p>
-        <p className="desc">Nombre de capteur dans cette pièce.</p>
+        <p className="label">{`${label} : ${payload[0].value}`} capteurs</p>
       </div>
     );
   }
@@ -31,7 +30,7 @@ class Graph extends PureComponent {
         .then(response => {
             var myData = [];
             for(var x in response.data){
-              myData.push({name: x, nb: response.data[x]})
+              myData.push({name: x, Nombre: response.data[x]})
             }
             // console.log(response.data.bathroom);
             this.setState({data: myData});
@@ -54,7 +53,7 @@ class Graph extends PureComponent {
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="nb" barSize={20} fill="#8884d8" />
+        <Bar dataKey="Nombre" barSize={20} fill="#8884d8" />
       </BarChart>
     );
   }

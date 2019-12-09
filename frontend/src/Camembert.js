@@ -28,7 +28,7 @@ class Camembert extends PureComponent {
         .then(response => {
             var myData = [];
             for(var x in response.data){
-              myData.push({name: x, value: response.data[x]})
+              myData.push({name: 'Maisons avec '+ x + ' habitants', value: response.data[x]})
             }
             this.setState({data: myData});
         });
@@ -38,8 +38,8 @@ class Camembert extends PureComponent {
     return (
       <div style={{ width: '100%', height: '100%' }}>
         <ResponsiveContainer>
-          <PieChart width={50} height={50}>
-            <Pie dataKey="value" isAnimationActive={false} data={this.state.data} cx='50%' cy='50%' outerRadius='50%' fill="#8884d8" label />
+          <PieChart width={70} height={70}>
+            <Pie dataKey="value" isAnimationActive={false} data={this.state.data} cx='50%' cy='50%' outerRadius='50%' fill="#ffb3d9" label />
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>

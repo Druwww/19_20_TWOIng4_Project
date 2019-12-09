@@ -13,18 +13,27 @@ import SocialNetwork from './SocialNetwork.js';
 class Home extends React.Component {
     render() {
         return (
-            <div>
                 <Row>
                     <Col md='8'className="mainWidget">
                         <Row>
-                            <Col className="widgetList"><Todo></Todo></Col>
-                            <Col className="widgetTreso"><Graph/></Col>
+                            <Col className="widgetList">
+                            <p className="listTitle"><strong>DERNIERS CAPTEURS AJOUTES</strong></p>
+                                <Todo/>
+                            </Col>
+                            <Col className="widgetTreso">
+                                <p className="listTitle"><strong>NOMBRE DE CAPTEURS PAR PIECE</strong></p>
+                                <Graph/>
+                            </Col>
                         </Row>
                         <Row>
                             <Col className="widgetNumberSensor">
-                                <Number/>
+                                <p className="simpleText"><strong>Vous avez :</strong></p>
+                                <p className="sensorNumber" ><Number /></p>
+                                <p className="simpleText"> <strong>capteurs installés !</strong></p> 
                             </Col >
-                            <Col className="widgetBudget"><Camembert/></Col>
+                            <Col className="widgetBudget">
+                                <Camembert/>
+                            </Col>
                         </Row>
                         <Row>
                             <Col className="widgetCal">
@@ -36,7 +45,6 @@ class Home extends React.Component {
                         <SocialNetwork/>
                     </Col>
                 </Row>
-            </div>
         );
     }
 }
