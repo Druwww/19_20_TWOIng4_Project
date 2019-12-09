@@ -285,8 +285,10 @@ exports.lastMeasure = (req, res) => {
         // If firstName is not present in body reject the request by
         // sending the appropriate http code
         measure.length = req.body.numberMeasures;
-      }
+      }else{
+        measure.length = 17;
 
+      }
       res.send(measure);
     })
     .catch(err => {
