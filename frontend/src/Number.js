@@ -16,8 +16,6 @@ class Number extends React.Component {
     componentDidMount(){
         axios.get('http://localhost:3000/sensors/numberSensors')
         .then(response => {
-            console.log(response.data.numberSensor);
-
             this.setState({numberSensor : response.data.numberSensor});
         });
     }
