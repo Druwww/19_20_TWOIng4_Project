@@ -16,6 +16,7 @@ exports.findAll = (req, res) => {
 
 // Create and Save a new User
 exports.create = (req, res) => {
+  console.log(req.body);
   // Validate request
   if (!req.body.location) {
     // If firstName is not present in body reject the request by
@@ -39,6 +40,8 @@ exports.create = (req, res) => {
     });
   }
 
+
+
   // Create a new User
   const user = new User({
     location: req.body.location,
@@ -46,6 +49,7 @@ exports.create = (req, res) => {
     houseSize : req.body.houseSize
     });
 
+  console.log(user);
   // Save User in the database
   user
     .save()
