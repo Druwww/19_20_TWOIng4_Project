@@ -338,18 +338,86 @@ exports.timeMeasures = (req, res) => {
     });
 };
 
-exports.timeMeasuresType = (req, res) => {
-
-  if (!req.body.type) {
-    // If firstName is not present in body reject the request by
-    // sending the appropriate http code
-    return res.status(400).send({
-      message: 'type can not be empty'
-    });
-  }
+exports.timeMeasuresTypeT = (req, res) => {
 
   var diffParam = {
-    type : req.body.type
+    type : "temperature"
+  }
+
+  Measure.find(diffParam)
+    .then(measure => {
+      var valeursHeures = [];
+
+      for(var i = 0; i<24; i++){
+        valeursHeures[i] = 0;
+      }
+
+      for(var i = 0; i < measure.length; i++){
+        const maDate = new Date(measure[i].creationDate);
+        valeursHeures[maDate.getHours()] += 1;
+      }
+
+      var values = {};
+
+      for(var i = 0; i < 24; i++){
+        values[i] = valeursHeures[i];
+      }
+      res.send(values);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params '
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving measure with thoses params'
+      });
+    });
+};
+
+exports.timeMeasuresTypeH = (req, res) => {
+
+  var diffParam = {
+    type : "humidity"
+  }
+
+  Measure.find(diffParam)
+    .then(measure => {
+      var valeursHeures = [];
+
+      for(var i = 0; i<24; i++){
+        valeursHeures[i] = 0;
+      }
+
+      for(var i = 0; i < measure.length; i++){
+        const maDate = new Date(measure[i].creationDate);
+        valeursHeures[maDate.getHours()] += 1;
+      }
+
+      var values = {};
+
+      for(var i = 0; i < 24; i++){
+        values[i] = valeursHeures[i];
+      }
+      res.send(values);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'Measure not found with thoses params '
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving measure with thoses params'
+      });
+    });
+};
+
+exports.timeMeasuresTypeA = (req, res) => {
+
+  var diffParam = {
+    type : "airPollution"
   }
 
   Measure.find(diffParam)
