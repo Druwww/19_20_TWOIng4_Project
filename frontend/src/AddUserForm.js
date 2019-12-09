@@ -31,8 +31,8 @@ class AddUserForm extends React.Component{
         axios({
             method: 'PUT',
             url: 'http://localhost:3000/user',
-            body: myData, 
-            headers: {"Content-Type": "text/plain"}
+            body: myData,
+            headers: {"Content-Type": "application/json"}
         })
         .then(response => {
             console.log(response);
