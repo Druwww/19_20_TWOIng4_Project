@@ -4,7 +4,6 @@ const User = require('../models/user.model.js');
 exports.findAll = (req, res) => {
   User.find()
     .then(users => {
-      console.log(users);
       res.send(users);
     })
     .catch(err => {
@@ -49,7 +48,6 @@ exports.create = (req, res) => {
     houseSize : req.body.houseSize
     });
 
-  console.log(user);
   // Save User in the database
   user
     .save()

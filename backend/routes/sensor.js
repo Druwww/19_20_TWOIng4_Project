@@ -7,6 +7,8 @@ router.put('/', sensor.create);
 
 router.get('/', sensor.findOne);
 
+router.get('/:userID', sensor.findOne);
+
 router.post('/', sensor.update);
 
 router.delete('/', sensor.delete);
