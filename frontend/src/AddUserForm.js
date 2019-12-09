@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, Alert } from 'react-bootstrap';
 const axios = require('axios');
 
 class AddUserForm extends React.Component{
@@ -12,30 +12,51 @@ class AddUserForm extends React.Component{
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
+		this.onChangeNbPersons = this.onChangeNbPersons.bind(this);
+		this.onChangeHouseSize = this.onChangeHouseSize.bind(this);
     }
 
-    handleSubmit(event) {
-        event.preventDefault(); 
-        const data1 = new FormData(event.target);
-        // const form = new FormData(document.getElementById('login-form'));
+	onChangeLocation(e){
+
+		this.setState({
+			location: e.target.value
+        });
         
-        const myData = {
-            location : data1.get('location'),
-            personsInHouse : data1.get('personsInHouse'),
-            houseSize : data1.get('houseSize')   
+	}
+
+	onChangeNbPersons(e) {
+
+		this.setState({
+			personsInHouse: e.target.value
+        });
+        
+    }
+    
+	onChangeHouseSize(e) {
+
+		this.setState({
+			houseSize: e.target.value
+        });
+    }
+
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const newUser = {
+            location: this.state.location,
+			personsInHouse: this.state.personsInHouse,
+			houseSize: this.state.houseSize,
         }
 
-        console.log(myData);
-
-
-        axios({
-            method: 'PUT',
-            url: 'http://localhost:3000/user',
-            body: myData,
-            headers: {"Content-Type": "application/json"}
-        })
+        axios.put('http://localhost:3000/user', newUser)
         .then(response => {
-            console.log(response);
+            this.setState({
+                location: "",
+                personsInHouse: "",
+                houseSize: ""  
+            });
         });
     }
     
@@ -52,6 +73,8 @@ class AddUserForm extends React.Component{
                                 id="location"
                                 placeholder="France" 
                                 type="text"
+                                value={this.state.location} 
+                                onChange={this.onChangeLocation}
                                 />
                             </Form.Group>
                             <Form.Row>
@@ -62,6 +85,8 @@ class AddUserForm extends React.Component{
                                     id="personsInHouse"
                                     placeholder="1, 2, ..." 
                                     type="text"
+                                    value={this.state.personsInHouse} 
+                                    onChange={this.onChangeNbPersons}
                                     />
                                 </Form.Group>
 
@@ -72,6 +97,8 @@ class AddUserForm extends React.Component{
                                     id="houseSize"
                                     placeholder="small, medium, big" 
                                     type="text"
+                                    value={this.state.houseSize} 
+                                    onChange={this.onChangeHouseSize}
                                     />
                                 </Form.Group>
                             </Form.Row>
