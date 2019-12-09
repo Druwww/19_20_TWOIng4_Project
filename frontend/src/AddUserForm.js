@@ -1,60 +1,63 @@
 import React from 'react';
-import { Form, Row, Col, Button, Toast } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
+const axios = require('axios');
 
 class AddUserForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            location:null,
+            personsInHouse: null,
+            houseSize: null
+        }
+    }
+
+    change = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+
+    };
+
+    onSubmit = () => {
+        
+    }
+
     render(){
         return(
             <div>
                 <Row>
                     <Col>                    
-                        <Form className="formFormat">
+                        <Form className="formFormat" method="POST" onsubmit={this.handleSubmit}>
+                            <Form.Group>
+                                <Form.Label>Adresse Personnelle</Form.Label>
+                                <Form.Control 
+                                name="location"
+                                placeholder="1234 Main St" 
+                                value={this.state.location} 
+                                onChange={e => this.change(e)}/>
+                            </Form.Group>
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formGridEmail">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Group as={Col}>
+                                    <Form.Label>Nombre d'habitants</Form.Label>
+                                    <Form.Control
+                                    name="personsInHouse" 
+                                    type="number" 
+                                    value={this.state.personsInHouse}
+                                    onChange={e => this.change(e)}/>
                                 </Form.Group>
 
-                                <Form.Group as={Col} controlId="formGridPassword">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" />
+                                <Form.Group as={Col} >
+                                    <Form.Label>Taille (m²)</Form.Label>
+                                    <Form.Control
+                                    name="houseSize"
+                                    type="number" 
+                                    value={this.state.houseSize} 
+                                    onChange={e => this.change(e)}/>
                                 </Form.Group>
                             </Form.Row>
 
-                            <Form.Group controlId="formGridAddress1">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control placeholder="1234 Main St" />
-                            </Form.Group>
-
-                            <Form.Group controlId="formGridAddress2">
-                                <Form.Label>Address 2</Form.Label>
-                                <Form.Control placeholder="Apartment, studio, or floor" />
-                            </Form.Group>
-
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control />
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridState">
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Control as="select">
-                                        <option>Choose...</option>
-                                        <option>...</option>
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridZip">
-                                    <Form.Label>Zip</Form.Label>
-                                    <Form.Control />
-                                </Form.Group>
-                            </Form.Row>
-
-                            <Form.Group id="formGridCheckbox">
-                                <Form.Check type="checkbox" label="Check me out" />
-                            </Form.Group>
-
-                            <Button variant="primary" onClick={() => this.setState({ showB: true })}>
+                            <Button variant="primary" type ="submit" onClick={() => this.onsubmit()}>
                                 Submit
                             </Button>
                         </Form>
@@ -62,7 +65,6 @@ class AddUserForm extends React.Component{
                     </Col>
                 </Row>
             </div>
-
         )
     }
 }
