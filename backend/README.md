@@ -8,7 +8,7 @@ Installation :
 
 The MongooseBD is already online (so no need to start it hehe)
 
-There is 3 collections : 
+There are 3 collections : 
 - Sensor
 
 - User

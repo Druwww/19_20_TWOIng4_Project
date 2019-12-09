@@ -19,15 +19,10 @@ class SocialNetwork extends Component {
         .then(response => {
             //limit for ce moment
             var showIni = {};
-            var i = 0;
 
             for(var x in response.data){
-                i++;
-                if(i < 10){
-                    showIni[x._id] = true;
-                }else{
-                    showIni[x._id] = false;
-                }
+                
+                showIni[x._id] = true;
             }
 
             this.setState({data: response.data, show : showIni});
