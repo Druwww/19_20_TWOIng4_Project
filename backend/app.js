@@ -1,4 +1,4 @@
-// var bodyParser = require('body-parser')
+var bodyParser = require('body-parser')
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -37,10 +37,10 @@ app.use(function(req, res, next) {
   });
   
 app.use(logger("dev"));
-// app.use(bodyParser.json()); // <--- Here
-// app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // <--- Here
+app.use(bodyParser.urlencoded({extended: true}));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
