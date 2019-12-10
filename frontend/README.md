@@ -35,9 +35,7 @@ Le Dashboard se mettra à jour en fonction des nouvelles donées.
 
 ## Documentation
 
-Pour s'organiser durant ce projet nous avons choisi d'utiliser un [Trello](https://trello.com/b/H1ALJj2r) aisni 
-que [Figma](https://www.figma.com/file/Tce56ElkVBjrJ45eyV7dHb/Projet-React?node-id=0%3A1) pour désigner nos 
-Wireframes. 
+Pour s'organiser durant ce projet nous avons choisi d'utiliser [Figma](https://www.figma.com/file/Tce56ElkVBjrJ45eyV7dHb/Projet-React?node-id=0%3A1) pour désigner nos Wireframes. 
 
 Nous avons également utilisé les différenst graphes de [Recharts](http://recharts.org/en-US/) pour y insérer nos données 
 afficacement.

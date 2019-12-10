@@ -1,8 +1,11 @@
 # Projet de fin de semestre par Pierre Miroite et Quentin Mulliez
+
+[Vidéo](https://www.loom.com/share/da9e6f9dbbc24895bdffb37c2f4fd6b1) de présentation du résultat :D
+
+Pour s'organiser durant ce projet nous avons choisi d'utiliser un [Trello](https://trello.com/b/H1ALJj2r)
+
 Les README d'installation se trouvent dans le folder backend (à lire en premier) et dans
 le folder frontend (à lire en deuxième du coup)
-
-
 
 
 
