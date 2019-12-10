@@ -7,9 +7,12 @@ router.get('/', measure.findAll);
 
 //Return n last measures from collection
 router.get('/lastMeasures', measure.lastMeasures);
-
+//Return n last measures from collection
+router.get('/lastMeasure', measure.lastMeasure);
 router.get('/timeMeasures', measure.timeMeasures);
 
-router.get('/timeMeasuresType', measure.timeMeasuresType);
+router.get('/timeMeasuresTypeT', measure.timeMeasuresTypeT);
+router.get('/timeMeasuresTypeH', measure.timeMeasuresTypeH);
+router.get('/timeMeasuresTypeA', measure.timeMeasuresTypeA);
 
 module.exports = router;

@@ -4,7 +4,6 @@ const User = require('../models/user.model.js');
 exports.findAll = (req, res) => {
   User.find()
     .then(users => {
-      console.log(users);
       res.send(users);
     })
     .catch(err => {
@@ -38,6 +37,8 @@ exports.create = (req, res) => {
       message: 'houseSize can not be empty'
     });
   }
+
+
 
   // Create a new User
   const user = new User({
@@ -151,7 +152,6 @@ exports.update = (req, res) => {
         newUser.personsInHouse = Number(newUser.personsInHouse);
         
         // Find user and update it with the request body
-        console.log(newUser);
         User.findByIdAndUpdate(
           req.body.userId,
           {$set: {
@@ -162,7 +162,6 @@ exports.update = (req, res) => {
           { new: true }
         )
           .then(userMod => {
-            console.log(userMod);
             if (!userMod) {
               return res.status(404).send({
                 message: 'User not found with id ' + req.body.userId
@@ -187,7 +186,8 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-  User.findByIdAndRemove(req.body.userId)
+
+  User.findByIdAndRemove(req.params.userId)
     .then(user => {
       if (!user) {
         return res.status(404).send({

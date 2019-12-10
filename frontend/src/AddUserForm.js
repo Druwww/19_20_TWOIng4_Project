@@ -1,60 +1,111 @@
 import React from 'react';
-import { Form, Row, Col, Button, Toast } from 'react-bootstrap';
+import './AddUserForm.css'
+import { Form, Row, Col, Button, Alert } from 'react-bootstrap';
+const axios = require('axios');
 
 class AddUserForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            location: "",
+            personsInHouse: "",
+            houseSize: ""
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
+		this.onChangeNbPersons = this.onChangeNbPersons.bind(this);
+		this.onChangeHouseSize = this.onChangeHouseSize.bind(this);
+    }
+
+	onChangeLocation(e){
+
+		this.setState({
+			location: e.target.value
+        });
+        
+	}
+
+	onChangeNbPersons(e) {
+
+		this.setState({
+			personsInHouse: e.target.value
+        });
+        
+    }
+    
+	onChangeHouseSize(e) {
+
+		this.setState({
+			houseSize: e.target.value
+        });
+    }
+
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const newUser = {
+            location: this.state.location,
+			personsInHouse: this.state.personsInHouse,
+			houseSize: this.state.houseSize,
+        }
+
+        axios.put('http://localhost:3000/user', newUser)
+        .then(response => {
+            this.setState({
+                location: "",
+                personsInHouse: "",
+                houseSize: ""  
+            });
+            window.location.reload();
+        });
+    }
+    
     render(){
         return(
             <div>
                 <Row>
                     <Col>                    
-                        <Form className="formFormat">
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Group>
+                                <Form.Label>Adresse Personnelle</Form.Label>
+                                <Form.Control 
+                                name="location"
+                                id="location"
+                                placeholder="France" 
+                                type="text"
+                                value={this.state.location} 
+                                onChange={this.onChangeLocation}
+                                />
+                            </Form.Group>
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formGridEmail">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Group as={Col}>
+                                    <Form.Label className="textSize" >Nombre d'habitants</Form.Label>
+                                    <Form.Control
+                                    name="personsInHouse" 
+                                    id="personsInHouse"
+                                    placeholder="1, 2, ..." 
+                                    type="text"
+                                    value={this.state.personsInHouse} 
+                                    onChange={this.onChangeNbPersons}
+                                    />
                                 </Form.Group>
 
-                                <Form.Group as={Col} controlId="formGridPassword">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" />
+                                <Form.Group as={Col} >
+                                    <Form.Label>Taille</Form.Label>
+                                    <Form.Control
+                                    name="houseSize"
+                                    id="houseSize"
+                                    placeholder="small, medium, big" 
+                                    type="text"
+                                    value={this.state.houseSize} 
+                                    onChange={this.onChangeHouseSize}
+                                    />
                                 </Form.Group>
                             </Form.Row>
 
-                            <Form.Group controlId="formGridAddress1">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control placeholder="1234 Main St" />
-                            </Form.Group>
-
-                            <Form.Group controlId="formGridAddress2">
-                                <Form.Label>Address 2</Form.Label>
-                                <Form.Control placeholder="Apartment, studio, or floor" />
-                            </Form.Group>
-
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control />
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridState">
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Control as="select">
-                                        <option>Choose...</option>
-                                        <option>...</option>
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridZip">
-                                    <Form.Label>Zip</Form.Label>
-                                    <Form.Control />
-                                </Form.Group>
-                            </Form.Row>
-
-                            <Form.Group id="formGridCheckbox">
-                                <Form.Check type="checkbox" label="Check me out" />
-                            </Form.Group>
-
-                            <Button variant="primary" onClick={() => this.setState({ showB: true })}>
+                            <Button variant="primary" type="submit">
                                 Submit
                             </Button>
                         </Form>
@@ -62,7 +113,6 @@ class AddUserForm extends React.Component{
                     </Col>
                 </Row>
             </div>
-
         )
     }
 }

@@ -1,60 +1,86 @@
 import React from 'react';
-import { Form, Row, Col, Button, Toast } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
+const axios = require('axios');
+
 
 class AddSensorForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            creationDate: "",
+            location: ""
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
+		this.onChangeCreationDate = this.onChangeCreationDate.bind(this);
+    }
+
+	onChangeLocation(e){
+
+		this.setState({
+			location: e.target.value
+        });
+        
+	}
+
+	onChangeCreationDate(e) {
+
+		this.setState({
+			creationDate: e.target.value
+        });
+        
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        console.log(this.state);
+
+        const newSensor = {
+            userID: this.props.userID,
+            location: this.state.location,
+			creationDate : this.state.creationDate
+        }
+
+        axios.put('http://localhost:3000/sensor', newSensor)
+        .then(response => {
+            console.log(response);
+            this.setState({
+                location: "",
+                creationDate : ""
+            });
+            window.location.reload();
+        });
+    }
+
+
     render() {
         return (
             <div>
                 <Row>
                     <Col>
-                        <Form className="formFormat">
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formGridEmail">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridPassword">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" />
-                                </Form.Group>
-                            </Form.Row>
-
-                            <Form.Group controlId="formGridAddress1">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control placeholder="1234 Main St" />
+                    <Form className="formFormat" onSubmit={this.handleSubmit}>
+                            <Form.Group>
+                                <Form.Label>Date d'installation</Form.Label>
+                                <Form.Control 
+                                type="text" 
+                                name="creationDate"
+                                id="creationDate"
+                                value={this.state.creationDate}
+                                onChange={this.onChangeCreationDate}/>
                             </Form.Group>
 
-                            <Form.Group controlId="formGridAddress2">
-                                <Form.Label>Address 2</Form.Label>
-                                <Form.Control placeholder="Apartment, studio, or floor" />
+                            <Form.Group>
+                                <Form.Label>Emplacement</Form.Label>
+                                <Form.Control 
+                                placeholder="Salon, Cuisine, Salle de bain"
+                                name="location"
+                                id="location"
+                                value={this.state.location}
+                                onChange={this.onChangeLocation}/>
                             </Form.Group>
-
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control />
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridState">
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Control as="select">
-                                        <option>Choose...</option>
-                                        <option>...</option>
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridZip">
-                                    <Form.Label>Zip</Form.Label>
-                                    <Form.Control />
-                                </Form.Group>
-                            </Form.Row>
-
-                            <Form.Group id="formGridCheckbox">
-                                <Form.Check type="checkbox" label="Check me out" />
-                            </Form.Group>
-
-                            <Button variant="primary" onClick={() => this.setState({ showB: true })}>
+                            <Button variant="primary" type="submit">
                                 Submit
                             </Button>
                         </Form>

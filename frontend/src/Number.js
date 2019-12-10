@@ -16,18 +16,12 @@ class Number extends React.Component {
     componentDidMount(){
         axios.get('http://localhost:3000/sensors/numberSensors')
         .then(response => {
-            console.log(response.data.numberSensor);
-
             this.setState({numberSensor : response.data.numberSensor});
         });
     }
     render() {
         return (
-            <div>
-                <p className="simpleText"><strong>Vous avez :</strong></p>
-                <p className = "sensorNumber"> {this.state.numberSensor}</p>
-                <p className="simpleText"> <strong>Capteurs !</strong></p>               
-            </div>
+            <p>{this.state.numberSensor}</p>
         );
     }
 }

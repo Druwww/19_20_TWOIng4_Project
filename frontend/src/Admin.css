@@ -4,10 +4,11 @@
   border-radius: 5%;
   opacity:.9;
   text-align: center;
-  height: 15em;
+  height: auto;
   margin-top: 2em;
-  margin-left: 2em;
+  margin-left: 1em;
   padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .user{
@@ -16,6 +17,7 @@
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
+  margin-bottom: 0.5em;
 }
 
 .userForm{
@@ -24,13 +26,24 @@
   opacity:.9;
   text-align: center;
   margin-top: 2.5em;
-  margin-left: 2em;
   padding-top: 1em;
 }
 
 .buttonCSS{
-  font-size: 1em;
-  float: right;
-  width: 30%;
+  font-size: 0.75em;
+  background-color: cornflowerblue;
+  color: white;
+  width: 60%;
+  border-radius: 5%;
+}
+
+.textStyle{
+  font-size:0.75em;
+}
+
+.gif{
   margin-left: 4em;
+  margin-bottom: 5em;
+  margin-top: 3em;
+  width: 74%;
 }

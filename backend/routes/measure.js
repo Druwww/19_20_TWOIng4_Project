@@ -7,12 +7,11 @@ var measure = require('../controllers/measure.controller');
 router.put('/', measure.create);
 
 router.get('/', measure.findOne);
-
-//Return n last measures from collection
-router.get('/lastMeasure', measure.lastMeasure);
+router.get('/:sensorID', measure.findOne);
 
 router.post('/', measure.update);
 
 router.delete('/', measure.delete);
+router.delete('/:sensorID', measure.delete);
 
 module.exports = router;

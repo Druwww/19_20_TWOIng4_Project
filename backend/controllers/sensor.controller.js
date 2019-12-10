@@ -6,7 +6,6 @@ const axios = require('axios');
 exports.findAll = (req, res) => {
   Sensor.find()
     .then(sensor => {
-      console.log(sensor);
       res.send(sensor);
     })
     .catch(err => {
@@ -19,6 +18,7 @@ exports.findAll = (req, res) => {
 
 // Create and Save a new Sensor
 exports.create = (req, res) => {
+  console.log(req.body);
   // Validate request
   if (!req.body.creationDate) {
     // If firstName is not present in body reject the request by
@@ -107,6 +107,10 @@ exports.findOne = (req, res) => {
       diffParams.userID = req.body.userID;
     }
 
+    if(req.params.userID){
+      diffParams.userID = req.params.userID;
+    }
+
     Sensor.find(diffParams)
     .then(sensor => {
       if (!sensor) {
@@ -156,7 +160,6 @@ exports.update = (req, res) => {
         delete newSensor.sensorId;
         
         // Find user and update it with the request body
-        console.log(newSensor);
         Sensor.findByIdAndUpdate(
           req.body.sensorId,
           {$set: {
@@ -167,7 +170,6 @@ exports.update = (req, res) => {
           { new: true }
         )
           .then(sensorMod => {
-            console.log(sensorMod);
             if (!sensorMod) {
               return res.status(404).send({
                 message: 'User not found with id ' + req.body.sensorId
@@ -191,7 +193,14 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-  Sensor.findByIdAndRemove(req.body.sensorId)
+
+  var id ="";
+  if(req.params.sensorID){
+    id = req.params.sensorID;
+  }else{
+    id = req.body.sensorID;
+  }
+  Sensor.findByIdAndRemove(id)
     .then(sensor => {
       if (!sensor) {
         return res.status(404).send({
@@ -272,13 +281,13 @@ exports.sensorsLocation = (req, res) => {
 
 exports.lastSensors = (req, res) => {
 
-  if (!req.body.numberSensors) {
-    // If firstName is not present in body reject the request by
-    // sending the appropriate http code
-    return res.status(400).send({
-      message: 'type can not be empty'
-    });
-  }
+  // if (!req.params.numberSensors) {
+  //   // If firstName is not present in body reject the request by
+  //   // sending the appropriate http code
+  //   return res.status(400).send({
+  //     message: 'type can not be empty'
+  //   });
+  // }
 
   if(req.body){
     var diffParams = {};
@@ -302,13 +311,17 @@ exports.lastSensors = (req, res) => {
           message: 'Sensor not found with thoses params ' + diffParams
         });
       }
-      sensor.length = req.body.numberSensors;
 
+        if (req.body.numberSensors) {
+          // If firstName is not present in body reject the request by
+          // sending the appropriate http code
+          sensor.length = req.body.numberSensors;
+          
+        }
+        else{
+          sensor.length = 3;
+        }
 
-      // sensor.sort(function(a,b){return (new Date(a.creationDate)) > (new Date(b.creationDate))})
-      
-      
-      console.log(sensor);
       res.send(sensor);
     })
     .catch(err => {

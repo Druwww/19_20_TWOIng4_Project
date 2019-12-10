@@ -1,13 +1,41 @@
 # Frontend
 
-Ce dossier contiendra la partie frontend de votre projet.
+C'est ici qu'est codée la partie "visuelle" de notre code. Vous y trouverez toutes les pages 
+JavaScript ainsi que les Pages CSS correspondantes
 
-Le frontend à été initalisé avec un create-react-app et sotrybook y est deja installé avec un exemple de stories que vous trouverez dans le repertoire `src/stories`.
+## Installation
 
-Storybook est là pour vous aider à prototyper et documenter vos composants. Si nous n'arrivons pas à lancer votre projet, nous pourrons au moins regarder vos composants en fonctionnement.
+Après avoir effectué dans votre console GitBash les commandes du README backend, entrez :
+```bash
+export PORT=8000
+npm start
+```
+
+Une page internet devrait donc s'ouvrir avec notre Dashboard 
+
+## Usage
+
+En arrivant sur le Dashboard, vous arriverez par défaut sur Home, l'Accueil de notre Dashboard.
+Vous aurez au total 6 Widgets récapitulants des données suivantes :
+- Les 3 derniers capteurs ajoutés
+- Le nombre de capteurs installés par pièce
+- Le nombre total de capteurs installés
+- Le nombre de maison avec 1, 2, 3, etc... habitants
+- Le nombre total de mseures prises par heure
+- Un récapitulatif des dernières mesures prises 
+
+Vous pourrez ensuite passer sur l'interface Administrateur et voir apparaître la liste totale
+des utilisateurs. De là, vous pourrez :
+- Ajouter un Utilisateur
+- Accédez à la liste de Capteurs de chaque Utilisateur
+- Lui ajouter un Capteur
+- Supprimer un Utilisateur
+
+Le Dashboard se mettra à jour en fonction des nouvelles donées.
 
 ## Documentation
 
-Vous pourrez supprimer le contenu de ce README et vous l'approprier en y notant les éléments importants de votre projet. Il est très important de bien documenter un projet !
+Pour s'organiser durant ce projet nous avons choisi d'utiliser [Figma](https://www.figma.com/file/Tce56ElkVBjrJ45eyV7dHb/Projet-React?node-id=0%3A1) pour désigner nos Wireframes. 
 
-Inspirez-vous des grands repos open sources qui existent sur github. Les informations qui reviennent souvent sont une description du projet (pourquoi, comment...), la maniere de lancer le projet et eventuellement d'y contribuer, une documentation sur des éléments que vous voulez mettre en avant et pour finir les noms des contributeurs.
+Nous avons également utilisé les différenst graphes de [Recharts](http://recharts.org/en-US/) pour y insérer nos données 
+afficacement.
