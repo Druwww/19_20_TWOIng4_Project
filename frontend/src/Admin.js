@@ -4,6 +4,7 @@ import AddUserForm from './AddUserForm.js';
 import AddSensorForm from './AddSensorForm.js';
 import UserList from './UserList.js';
 import MeasureList from './MeasureList.js';
+import giphy from './giphy.webp';
 import {Row, Col, Button, Toast, Form} from 'react-bootstrap';
 import './Admin.css';
 import { tsParameterProperty } from '@babel/types';
@@ -60,6 +61,9 @@ class Admin extends React.Component {
                         ))}
                         </p>
                     </div>
+                        <Toast className="gif" show={this.state.showAddSensorForm && this.state.showAddUserForm && this.state.showMeasureList && this.state.showUserList}>
+                            <img src={giphy} alt="giphy" />
+                        </Toast>
                 </Col>
                 <Col md="9">
                     <Row>
