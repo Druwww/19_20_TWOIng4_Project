@@ -4,7 +4,7 @@ import AddUserForm from './AddUserForm.js';
 import AddSensorForm from './AddSensorForm.js';
 import UserList from './UserList.js';
 import MeasureList from './MeasureList.js';
-import giphy from './giphy.webp';
+import giphy from './giphy.gif';
 import {Row, Col, Button, Toast, Form} from 'react-bootstrap';
 import './Admin.css';
 import { tsParameterProperty } from '@babel/types';
