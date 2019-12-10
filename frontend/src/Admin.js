@@ -65,7 +65,7 @@ class Admin extends React.Component {
                     <Row>
                         <Col md="3">
                             <Toast className="userForm" show={this.state.showUserList} onClose={() => this.setState({ showUserList: false })}>
-                                <Toast.Header>
+                                <Toast.Header className="textStyle">
                                     Capteurs du User {this.state.userID}
                                 </Toast.Header>
                                     <button className="buttonCSS" onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</button>
