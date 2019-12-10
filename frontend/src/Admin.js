@@ -54,7 +54,7 @@ class Admin extends React.Component {
                         <p className="user">
                             
                         {this.state.listUser.map(({ _id, location, houseSize, personsInHouse}) => (
-                            <Button className="user" onClick={() => this.setState({ showUserList: true, userID: _id, sensorID: "", measureID: "", showMeasureList: false})}>
+                            <Button size="sm" className="user" onClick={() => this.setState({ showUserList: true, userID: _id, sensorID: "", measureID: "", showMeasureList: false})}>
                                     {_id}
                             </Button>
                         ))}
@@ -68,7 +68,8 @@ class Admin extends React.Component {
                                 <Toast.Header className="textStyle">
                                     Capteurs du User {this.state.userID}
                                 </Toast.Header>
-                                    <button className="buttonCSS" onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</button>
+                                    <br></br>
+                                    <Button className="buttonCSS" size="sm" onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
                                 <Toast.Body>
                                     <UserList userID={this.state.userID} fonctionMeasure={this}/>
                                 </Toast.Body>
@@ -78,11 +79,16 @@ class Admin extends React.Component {
 
                         <Col md="3">
                             <Toast className="userForm" show={this.state.showMeasureList} onClose={() => this.setState({ showMeasureList: false })}>
-                                <Toast.Header>
+                                    <Toast.Header className="textStyle">
                                     Mesures du Capteur {this.state.sensorID}
-                                    <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
                                 </Toast.Header>
-                                <MeasureList sensorID={this.state.sensorID}/>
+                                    <br></br>
+                                    <Button className="buttonCSS" size="sm" onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
+
+                                <Toast.Body>
+                                    <MeasureList sensorID={this.state.sensorID}/>
+                                </Toast.Body>
+                                
                             </Toast>
                         </Col>
                 

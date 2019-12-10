@@ -41,7 +41,7 @@ class UserList extends React.Component {
 
     renderElement(_id, creationDate, location){
         return(
-            <ListGroup.Item variant="primary"><Button onClick={() => this.manageClick(_id)}>{_id} {creationDate} {location}</Button></ListGroup.Item>
+            <ListGroup.Item variant="primary"><Button size="sm" onClick={() => this.manageClick(_id)}>{_id} {creationDate} {location}</Button></ListGroup.Item>
         )
     }
 
@@ -71,7 +71,7 @@ class UserList extends React.Component {
                             <br></br>
                         </ListGroup>
 
-                        <Button onClick={this.handleSubmit}>
+                        <Button size="sm" onClick={this.handleSubmit}>
                             Supprimer Utilisateur
                         </Button><br></br><br></br>
                     </Col>

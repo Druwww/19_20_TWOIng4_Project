@@ -1,4 +1,5 @@
 import React from 'react';
+import './AddUserForm.css'
 import { Form, Row, Col, Button, Alert } from 'react-bootstrap';
 const axios = require('axios');
 
@@ -66,7 +67,7 @@ class AddUserForm extends React.Component{
             <div>
                 <Row>
                     <Col>                    
-                        <Form className="formFormat" onSubmit={this.handleSubmit}>
+                        <Form onSubmit={this.handleSubmit}>
                             <Form.Group>
                                 <Form.Label>Adresse Personnelle</Form.Label>
                                 <Form.Control 
@@ -80,7 +81,7 @@ class AddUserForm extends React.Component{
                             </Form.Group>
                             <Form.Row>
                                 <Form.Group as={Col}>
-                                    <Form.Label>Nombre d'habitants</Form.Label>
+                                    <Form.Label className="textSize" >Nombre d'habitants</Form.Label>
                                     <Form.Control
                                     name="personsInHouse" 
                                     id="personsInHouse"
