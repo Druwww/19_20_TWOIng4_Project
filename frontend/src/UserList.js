@@ -13,18 +13,16 @@ class UserList extends React.Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.manageClick = this.manageClick.bind(this);
+        this.renderElement = this.renderElement.bind(this);
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
         const deleteInfo = 'http://localhost:3000/user/' + this.props.userID;
-
-        console.log(deleteInfo);
-
         axios.delete(deleteInfo)
         .then(response => {
-            console.log(response);
             this.setState({
                 listSensors : []
             });
@@ -32,24 +30,30 @@ class UserList extends React.Component {
         });
     }
 
+    manageClick(para){
+        console.log(para);
+        console.log(this.props.fonctionMeasure);
+        this.props.fonctionMeasure.setState({ sensorID :para, showMeasureList: true});
+    }
+
     componentDidMount(){ 
+    }
+
+    renderElement(_id, creationDate, location){
+        return(
+            <ListGroup.Item variant="primary"><Button onClick={() => this.manageClick(_id)}>{_id} {creationDate} {location}</Button></ListGroup.Item>
+        )
     }
 
     componentDidUpdate(prevProps){
 
         if(prevProps.userID != this.props.userID){
             const urlR = 'http://localhost:3000/sensor/' + this.props.userID;  
-            
-
-            console.log(urlR);
-    
             axios.get(urlR)
             .then(response => {
                 this.setState({
                     listSensors : response.data
                 });
-
-                console.log(this.state.listSensors);
             });
         }
     }
@@ -62,7 +66,7 @@ class UserList extends React.Component {
                         <ListGroup>
 
                         {this.state.listSensors.map(({ _id, creationDate, location }) => (
-                            <ListGroup.Item variant="primary">{_id} {creationDate} {location}</ListGroup.Item>
+                            this.renderElement(_id, creationDate, location)
                         ))}
                             <br></br>
                         </ListGroup>

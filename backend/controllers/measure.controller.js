@@ -116,6 +116,10 @@ exports.findOne = (req, res) => {
       diffParams.value = req.body.value;
     }
 
+    if(req.params.sensorID){
+      diffParams.sensorID = req.params.sensorID;
+    }
+
     Measure.find(diffParams)
     .then(measure => {
       if (!measure) {
