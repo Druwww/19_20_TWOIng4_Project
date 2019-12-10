@@ -6,7 +6,6 @@ const axios = require('axios');
 exports.findAll = (req, res) => {
   Sensor.find()
     .then(sensor => {
-      console.log(sensor);
       res.send(sensor);
     })
     .catch(err => {
@@ -19,6 +18,7 @@ exports.findAll = (req, res) => {
 
 // Create and Save a new Sensor
 exports.create = (req, res) => {
+  console.log(req.body);
   // Validate request
   if (!req.body.creationDate) {
     // If firstName is not present in body reject the request by
@@ -71,8 +71,6 @@ exports.create = (req, res) => {
 // Find a single User with a UserId
 exports.findOne = (req, res) => {
 
-  console.log(req.params);
-
   //If id is pass in request
   if(req.body.sensorId){
     Sensor.findById(req.body.sensorId)
@@ -112,8 +110,6 @@ exports.findOne = (req, res) => {
     if(req.params.userID){
       diffParams.userID = req.params.userID;
     }
-
-    console.log(diffParams);
 
     Sensor.find(diffParams)
     .then(sensor => {
@@ -164,7 +160,6 @@ exports.update = (req, res) => {
         delete newSensor.sensorId;
         
         // Find user and update it with the request body
-        console.log(newSensor);
         Sensor.findByIdAndUpdate(
           req.body.sensorId,
           {$set: {
@@ -175,7 +170,6 @@ exports.update = (req, res) => {
           { new: true }
         )
           .then(sensorMod => {
-            console.log(sensorMod);
             if (!sensorMod) {
               return res.status(404).send({
                 message: 'User not found with id ' + req.body.sensorId

@@ -1,52 +1,74 @@
 import React from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
+const axios = require('axios');
 
-/*Creation sensor
-axios({
-    method: 'put',
-    url: 'http://localhost:3000/sensor',
-    data: {
-        creationDate: "blabla",
-        location: 'blablabla',
-        userID: 'blablabla'
-    }
-})
-    .then(response => {
-        var monSensorCreer = responce;
-    });
-*/
+
 class AddSensorForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            creationDate: null,
-            location: null
+            creationDate: "",
+            location: ""
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
+		this.onChangeCreationDate = this.onChangeCreationDate.bind(this);
     }
 
-    change = e => {
-        this.setState({
-            [e.target.name]: e.target.value
+	onChangeLocation(e){
+
+		this.setState({
+			location: e.target.value
         });
+        
+	}
 
-    };
+	onChangeCreationDate(e) {
 
-    onSubmit = () => {
-
+		this.setState({
+			creationDate: e.target.value
+        });
+        
     }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        console.log(this.state);
+
+        const newSensor = {
+            userID: this.props.userID,
+            location: this.state.location,
+			creationDate : this.state.creationDate
+        }
+
+        axios.put('http://localhost:3000/sensor', newSensor)
+        .then(response => {
+            console.log(response);
+            this.setState({
+                location: "",
+                creationDate : ""
+            });
+            window.location.reload();
+        });
+    }
+
+
     render() {
         return (
             <div>
                 <Row>
                     <Col>
-                        <Form className="formFormat" method="POST" onsubmit={this.handleSubmit}>
+                    <Form className="formFormat" onSubmit={this.handleSubmit}>
                             <Form.Group>
                                 <Form.Label>Date d'installation</Form.Label>
                                 <Form.Control 
-                                type="date" 
+                                type="text" 
                                 name="creationDate"
+                                id="creationDate"
                                 value={this.state.creationDate}
-                                onChange={e => this.change(e)}/>
+                                onChange={this.onChangeCreationDate}/>
                             </Form.Group>
 
                             <Form.Group>
@@ -54,10 +76,11 @@ class AddSensorForm extends React.Component {
                                 <Form.Control 
                                 placeholder="Salon, Cuisine, Salle de bain"
                                 name="location"
+                                id="location"
                                 value={this.state.location}
-                                onChange={e => this.change(e)}/>
+                                onChange={this.onChangeLocation}/>
                             </Form.Group>
-                            <Button variant="primary" onClick={() => this.onSubmit()}>
+                            <Button variant="primary" type="submit">
                                 Submit
                             </Button>
                         </Form>

@@ -57,6 +57,7 @@ class AddUserForm extends React.Component{
                 personsInHouse: "",
                 houseSize: ""  
             });
+            window.location.reload();
         });
     }
     

@@ -11,6 +11,25 @@ class UserList extends React.Component {
         this.state = {
             listSensors : []
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const deleteInfo = 'http://localhost:3000/user/' + this.props.userID;
+
+        console.log(deleteInfo);
+
+        axios.delete(deleteInfo)
+        .then(response => {
+            console.log(response);
+            this.setState({
+                listSensors : []
+            });
+            window.location.reload();
+        });
     }
 
     componentDidMount(){ 
@@ -33,8 +52,6 @@ class UserList extends React.Component {
                 console.log(this.state.listSensors);
             });
         }
-        
-
     }
 
     render() {
@@ -50,7 +67,7 @@ class UserList extends React.Component {
                             <br></br>
                         </ListGroup>
 
-                        <Button>
+                        <Button onClick={this.handleSubmit}>
                             Supprimer Utilisateur
                         </Button><br></br><br></br>
                     </Col>
