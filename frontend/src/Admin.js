@@ -3,8 +3,10 @@ import Calendar from './Calendar.js';
 import AddUserForm from './AddUserForm.js';
 import AddSensorForm from './AddSensorForm.js';
 import UserList from './UserList.js';
+import MeasureList from './MeasureList.js';
 import {Row, Col, Button, Toast, Form} from 'react-bootstrap';
 import './Admin.css';
+import { tsParameterProperty } from '@babel/types';
 const axios = require('axios');
 
 
@@ -15,10 +17,19 @@ class Admin extends React.Component {
             showAddUserForm: false,
             showUserList: false,
             showAddSensorForm: false,
+            showMeasureList: false,
             listUser : [],
             listSensor : [],
-            userID: 0
+            listMeasure : [],
+            userID: 0,
+            sensorID: 0
         };
+    }
+
+    renderListMeasure(para){
+        console.log(para);
+        this.setState({sensorID : para});
+        this.setState({showMeasureList : true});
     }
 
     componentDidMount(){
@@ -31,6 +42,7 @@ class Admin extends React.Component {
 
     render(){
         return (
+            <div>
             <Row>
                 <Col md="3">
                     <div className="userList">
@@ -42,7 +54,7 @@ class Admin extends React.Component {
                         <p className="user">
                             
                         {this.state.listUser.map(({ _id, location, houseSize, personsInHouse}) => (
-                            <Button className="user" onClick={() => this.setState({ showUserList: true, userID: _id})}>
+                            <Button className="user" onClick={() => this.setState({ showUserList: true, userID: _id, sensorID: "", measureID: "", showMeasureList: false})}>
                                     {_id}
                             </Button>
                         ))}
@@ -55,9 +67,22 @@ class Admin extends React.Component {
                             Capteurs du User {this.state.userID}
                             <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
                         </Toast.Header>
-                        <UserList userID={this.state.userID}/>
+                        <UserList userID={this.state.userID} fonctionMeasure={this}/>
                     </Toast>
                 </Col>
+
+                <Col md="3">
+                    <Toast className="userForm" show={this.state.showMeasureList} onClose={() => this.setState({ showMeasureList: false })}>
+                        <Toast.Header>
+                            Mesures du Capteur {this.state.sensorID}
+                            <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
+                        </Toast.Header>
+                        <MeasureList sensorID={this.state.sensorID}/>
+                    </Toast>
+                </Col>
+            </Row>
+
+            <Row>
 
                 <Col md="3">
                     <Toast className="userForm" show={this.state.showAddUserForm} onClose={() => this.setState({ showAddUserForm: false })}>
@@ -77,6 +102,7 @@ class Admin extends React.Component {
                     </Toast>
                 </Col>
             </Row>
+            </div>
 
         );
     }
