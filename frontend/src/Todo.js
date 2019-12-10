@@ -34,7 +34,6 @@ class Todo extends React.Component {
 
       return (
         <div>
-          <p>Dernier capteur crée</p>
           {this.state.data.map(({ _id, creationDate, location, userID }) => (
             <OverlayTrigger
                 placement="right"
