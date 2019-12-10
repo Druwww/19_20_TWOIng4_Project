@@ -1,4 +1,10 @@
 # Projet de fin de semestre par Pierre Miroite et Quentin Mulliez
+Les README d'installation se trouvent dans le folder backend (à lire en premier) et dans
+le folder frontend (à lire en deuxième du coup)
+
+
+
+
 
 A lire impérativement avant de commencer quoi que ce soit, ce sont les règles que vous devrez appliquer tout au long du semestre:
 
