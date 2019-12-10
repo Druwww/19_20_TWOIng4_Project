@@ -230,17 +230,18 @@ exports.delete = (req, res) => {
 exports.lastMeasures = (req, res) => {
 
   // Validate request
-  if (!req.body.numberMeasures) {
-    // If firstName is not present in body reject the request by
-    // sending the appropriate http code
-    return res.status(400).send({
-      message: 'type can not be empty'
-    });
-  }
+  
 
   Measure.find().sort({ creationDate: -1 })
     .then(measures => {
-      measures.length = req.body.numberMeasures;
+
+      if (req.body.numberMeasures) {
+        measures.length = req.body.numberMeasures;
+        
+      }else{
+        measures.length = 20;
+
+      }
 
       res.send(measures);
     })
