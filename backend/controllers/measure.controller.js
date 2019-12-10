@@ -206,7 +206,16 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-  Measure.findByIdAndRemove(req.body.measureId)
+
+  var id ="";
+  if(req.params.measureID){
+    id = req.params.measureID;
+  }else{
+    id = req.body.measureID;
+  }
+
+
+  Measure.findByIdAndRemove(id)
     .then(measure => {
       if (!measure) {
         return res.status(404).send({
