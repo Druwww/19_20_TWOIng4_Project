@@ -15,7 +15,7 @@ class SocialNetwork extends Component {
     }
 
     componentDidMount(){
-        axios.get('http://localhost:3000/measure/lastMeasure')
+        axios.get('http://localhost:3000/measures/lastMeasure')
         .then(response => {
             //limit for ce moment
             var showIni = {};

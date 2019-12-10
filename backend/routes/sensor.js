@@ -12,5 +12,6 @@ router.get('/:userID', sensor.findOne);
 router.post('/', sensor.update);
 
 router.delete('/', sensor.delete);
+router.delete('/:sensorID', sensor.delete);
 
 module.exports = router;

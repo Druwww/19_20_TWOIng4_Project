@@ -193,7 +193,14 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-  Sensor.findByIdAndRemove(req.body.sensorId)
+
+  var id ="";
+  if(req.params.sensorID){
+    id = req.params.sensorID;
+  }else{
+    id = req.body.sensorID;
+  }
+  Sensor.findByIdAndRemove(id)
     .then(sensor => {
       if (!sensor) {
         return res.status(404).send({

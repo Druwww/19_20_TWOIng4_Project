@@ -9,11 +9,9 @@ router.put('/', measure.create);
 router.get('/', measure.findOne);
 router.get('/:sensorID', measure.findOne);
 
-//Return n last measures from collection
-router.get('/lastMeasure', measure.lastMeasure);
-
 router.post('/', measure.update);
 
 router.delete('/', measure.delete);
+router.delete('/:sensorID', measure.delete);
 
 module.exports = router;
