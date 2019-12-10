@@ -152,7 +152,6 @@ exports.update = (req, res) => {
         newUser.personsInHouse = Number(newUser.personsInHouse);
         
         // Find user and update it with the request body
-        console.log(newUser);
         User.findByIdAndUpdate(
           req.body.userId,
           {$set: {
@@ -187,8 +186,6 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-
-  console.log(req.params);
 
   User.findByIdAndRemove(req.params.userId)
     .then(user => {

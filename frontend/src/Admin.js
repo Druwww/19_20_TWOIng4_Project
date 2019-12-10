@@ -73,7 +73,7 @@ class Admin extends React.Component {
                         <Toast.Header>
                             <span>Ajouter un nouveau capteur</span>
                         </Toast.Header>
-                        <AddSensorForm/>
+                        <AddSensorForm userID={this.state.userID}/>
                     </Toast>
                 </Col>
             </Row>
