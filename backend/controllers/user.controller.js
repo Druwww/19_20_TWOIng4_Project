@@ -15,7 +15,6 @@ exports.findAll = (req, res) => {
 
 // Create and Save a new User
 exports.create = (req, res) => {
-  console.log(req.body);
   // Validate request
   if (!req.body.location) {
     // If firstName is not present in body reject the request by
@@ -164,7 +163,6 @@ exports.update = (req, res) => {
           { new: true }
         )
           .then(userMod => {
-            console.log(userMod);
             if (!userMod) {
               return res.status(404).send({
                 message: 'User not found with id ' + req.body.userId
@@ -189,7 +187,10 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-  User.findByIdAndRemove(req.body.userId)
+
+  console.log(req.params);
+
+  User.findByIdAndRemove(req.params.userId)
     .then(user => {
       if (!user) {
         return res.status(404).send({
