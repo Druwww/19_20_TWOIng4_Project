@@ -61,45 +61,49 @@ class Admin extends React.Component {
                         </p>
                     </div>
                 </Col>
-                <Col md="3">
-                    <Toast className="userForm" show={this.state.showUserList} onClose={() => this.setState({ showUserList: false })}>
-                        <Toast.Header>
-                            Capteurs du User {this.state.userID}
-                            <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
-                        </Toast.Header>
-                        <UserList userID={this.state.userID} fonctionMeasure={this}/>
-                    </Toast>
-                </Col>
+                <Col md="9">
+                    <Row>
+                        <Col md="3">
+                            <Toast className="userForm" show={this.state.showUserList} onClose={() => this.setState({ showUserList: false })}>
+                                <Toast.Header>
+                                    Capteurs du User {this.state.userID}
+                                </Toast.Header>
+                                    <button className="buttonCSS" onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</button>
+                                <Toast.Body>
+                                    <UserList userID={this.state.userID} fonctionMeasure={this}/>
+                                </Toast.Body>
+                                
+                            </Toast>
+                        </Col>
 
-                <Col md="3">
-                    <Toast className="userForm" show={this.state.showMeasureList} onClose={() => this.setState({ showMeasureList: false })}>
-                        <Toast.Header>
-                            Mesures du Capteur {this.state.sensorID}
-                            <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
-                        </Toast.Header>
-                        <MeasureList sensorID={this.state.sensorID}/>
-                    </Toast>
-                </Col>
-            </Row>
+                        <Col md="3">
+                            <Toast className="userForm" show={this.state.showMeasureList} onClose={() => this.setState({ showMeasureList: false })}>
+                                <Toast.Header>
+                                    Mesures du Capteur {this.state.sensorID}
+                                    <Button className="buttonCSS"onClick={() => this.setState({ showAddSensorForm: true })}> Nouveau capteur</Button>
+                                </Toast.Header>
+                                <MeasureList sensorID={this.state.sensorID}/>
+                            </Toast>
+                        </Col>
+                
+                        <Col md="3">
+                            <Toast className="userForm" show={this.state.showAddUserForm} onClose={() => this.setState({ showAddUserForm: false })}>
+                                <Toast.Header>
+                                    <span>Ajouter un nouvel utilisateur</span>
+                                </Toast.Header>
+                                <AddUserForm/>
+                            </Toast>
+                        </Col>
 
-            <Row>
-
-                <Col md="3">
-                    <Toast className="userForm" show={this.state.showAddUserForm} onClose={() => this.setState({ showAddUserForm: false })}>
-                        <Toast.Header>
-                            <span>Ajouter un nouvel utilisateur</span>
-                        </Toast.Header>
-                        <AddUserForm/>
-                    </Toast>
-                </Col>
-
-                <Col md="3">
-                    <Toast className="userForm" show={this.state.showAddSensorForm} onClose={() => this.setState({ showAddSensorForm: false })}>
-                        <Toast.Header>
-                            <span>Ajouter un nouveau capteur</span>
-                        </Toast.Header>
-                        <AddSensorForm userID={this.state.userID}/>
-                    </Toast>
+                        <Col md="3">
+                            <Toast className="userForm" show={this.state.showAddSensorForm} onClose={() => this.setState({ showAddSensorForm: false })}>
+                                <Toast.Header>
+                                    <span>Ajouter un nouveau capteur</span>
+                                </Toast.Header>
+                                <AddSensorForm userID={this.state.userID}/>
+                            </Toast>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
             </div>
